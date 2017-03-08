@@ -80,7 +80,9 @@ public class RoverCommandProcessor {
 	// These are the velocity or speed values for the different drive systems
 	// Changes these as necessary for good simulation balance
     static final int WHEELS_TIME_PER_SQUARE = 400;
-    static final int TREADS_TIME_PER_SQUARE = 900;
+    //Mani: TREADS Rover can move immediately after previous move
+    //static final int TREADS_TIME_PER_SQUARE = 900;
+    static final int TREADS_TIME_PER_SQUARE = 0;
     static final int WALKER_TIME_PER_SQUARE = 1200;
     
     // limit of how many Calls can be made to the swarm server during a 1 second span
@@ -522,6 +524,7 @@ public class RoverCommandProcessor {
 	    	Coord roverPos = roverLocations.getLocation(thisRover.getRoverName());
 	    	int xCurrentPos = roverPos.xpos;
 	    	int yCurrentPos = roverPos.ypos;
+	    	System.out.println("Rover "+thisRover.getRoverName()+" has requested move "+requestedMoveDir+" from "+xCurrentPos+","+yCurrentPos);
 	    	
 
 	    		    	
@@ -615,12 +618,16 @@ public class RoverCommandProcessor {
 	    	// ********* TREADS **********
 	    	// test for conditions that will prevent movement - too soon after last move and sitting on a rock
 	    	// treads will get stuck on rocks
+	    	System.out.println(thisRover.getRoverName()+" drive train: "+thisRover.getRoverDrive());
+	    	System.out.println(thisRover.getRoverName()+" time check: "+(thisRover.getRoverLastMoveTime() + TREADS_TIME_PER_SQUARE < (System.currentTimeMillis())));
+	    	System.out.println(thisRover.getRoverName()+" terrain: "+planetMap.getTile(roverPos).getTerrain());
 	    	if(thisRover.getRoverDrive() == RoverDriveType.TREADS
 	    			&& thisRover.getRoverLastMoveTime() + TREADS_TIME_PER_SQUARE < (System.currentTimeMillis()) 
 	    			&& planetMap.getTile(roverPos).getTerrain() != Terrain.ROCK){
 	    			    		
 	    			if(requestedMoveDir.equals("N")){
 		    		yCurrentPos = yCurrentPos - 1;
+		    		System.out.println("Rover "+thisRover.getRoverName()+" moves N to "+xCurrentPos+","+yCurrentPos);
     				if(!isValid_Y(yCurrentPos)){
     					// On the edge, returns rovers current position unchanged
     					return roverPos;
@@ -640,6 +647,7 @@ public class RoverCommandProcessor {
 		    	
 	    			if(requestedMoveDir.equals("S")){
 		    		yCurrentPos = yCurrentPos + 1;
+		    		System.out.println("Rover "+thisRover.getRoverName()+" moves S to "+xCurrentPos+","+yCurrentPos);
     				if(!isValid_Y(yCurrentPos)){
     					// On the edge, returns rovers current position unchanged
     					return roverPos;
@@ -659,6 +667,7 @@ public class RoverCommandProcessor {
 	    			
 	    			if(requestedMoveDir.equals("E")){
 			    		xCurrentPos = xCurrentPos + 1;
+			    		System.out.println("Rover "+thisRover.getRoverName()+" moves E to "+xCurrentPos+","+yCurrentPos);
 	    				if(!isValid_X(xCurrentPos)){
 	    					// On the edge, returns rovers current position unchanged
 	    					return roverPos;
@@ -678,6 +687,7 @@ public class RoverCommandProcessor {
 	    			
 	    			if(requestedMoveDir.equals("W")){
 			    		xCurrentPos = xCurrentPos - 1;
+			    		System.out.println("Rover "+thisRover.getRoverName()+" moves W to "+xCurrentPos+","+yCurrentPos);
 	    				if(!isValid_X(xCurrentPos)){
 	    					// On the edge, returns rovers current position unchanged
 	    					return roverPos;
