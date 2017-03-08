@@ -183,7 +183,8 @@ public class ROVER_03 extends Rover {
 				} else if (currentDir == Direction.SOUTH) {
 					if (currSouthSteps > 0) {
 						if (scanMapTiles[centerIndex][centerIndex + 1].getHasRover()
-								|| scanMapTiles[centerIndex][centerIndex + 1].getTerrain() == Terrain.ROCK) {
+								|| scanMapTiles[centerIndex][centerIndex + 1].getTerrain() == Terrain.ROCK
+								|| scanMapTiles[centerIndex-1][centerIndex + 1].getTerrain() == Terrain.ROCK) {
 							Coord beforeLoc = getCurrentLocation();
 							takeDiversion(currentDir);
 							Coord afterLoc = getCurrentLocation();
