@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import common.Coord;
 import common.MapTile;
 import common.Rover;
 import enums.Terrain;
@@ -88,8 +89,8 @@ public class ROVER_03 extends Rover {
 
 			int northSteps = 1, currNorthSteps = 1;
 			int eastSteps = 1, currEastSteps = 1;
-			int southSteps = 1, currSouthSteps = 1;
-			int westSteps = 1, currWestSteps = 1;
+			int southSteps = 2, currSouthSteps = 2;
+			int westSteps = 2, currWestSteps = 2;
 
 			/**
 			 * #### Rover controller process loop ####
@@ -131,7 +132,16 @@ public class ROVER_03 extends Rover {
 					if (currNorthSteps > 0) {
 						if (scanMapTiles[centerIndex][centerIndex - 1].getHasRover()
 								|| scanMapTiles[centerIndex][centerIndex - 1].getTerrain() == Terrain.ROCK) {
+							Coord beforeLoc = getCurrentLocation();
 							takeDiversion(currentDir);
+							Coord afterLoc = getCurrentLocation();
+							currNorthSteps = currNorthSteps - (beforeLoc.ypos - afterLoc.ypos);
+							currEastSteps = currEastSteps - (afterLoc.xpos - beforeLoc.xpos);
+							if (currNorthSteps > 0) {
+								currentDir = Direction.NORTH;
+							} else {
+								currentDir = Direction.EAST;
+							}
 						} else {
 							System.out.println("======> Loc before move north: " + getCurrentLocation());
 							moveNorth();
@@ -139,8 +149,8 @@ public class ROVER_03 extends Rover {
 							currNorthSteps--;
 						}
 					}
-					if (currNorthSteps == 0) {
-						northSteps += 1;
+					if (currNorthSteps <= 0) {
+						northSteps += 2;
 						currNorthSteps = northSteps;
 						currentDir = Direction.EAST;
 					}
@@ -148,7 +158,16 @@ public class ROVER_03 extends Rover {
 					if (currEastSteps > 0) {
 						if (scanMapTiles[centerIndex + 1][centerIndex].getHasRover()
 								|| scanMapTiles[centerIndex + 1][centerIndex].getTerrain() == Terrain.ROCK) {
+							Coord beforeLoc = getCurrentLocation();
 							takeDiversion(currentDir);
+							Coord afterLoc = getCurrentLocation();
+							currEastSteps = currEastSteps - (afterLoc.xpos - beforeLoc.xpos);
+							currSouthSteps = currSouthSteps - (afterLoc.ypos - beforeLoc.ypos);
+							if (currEastSteps > 0) {
+								currentDir = Direction.EAST;
+							} else {
+								currentDir = Direction.SOUTH;
+							}
 						} else {
 							System.out.println("======> Loc before move east: " + getCurrentLocation());
 							moveEast();
@@ -156,8 +175,8 @@ public class ROVER_03 extends Rover {
 							currEastSteps--;
 						}
 					}
-					if (currEastSteps == 0) {
-						eastSteps += 1;
+					if (currEastSteps <= 0) {
+						eastSteps += 2;
 						currEastSteps = eastSteps;
 						currentDir = Direction.SOUTH;
 					}
@@ -165,7 +184,16 @@ public class ROVER_03 extends Rover {
 					if (currSouthSteps > 0) {
 						if (scanMapTiles[centerIndex][centerIndex + 1].getHasRover()
 								|| scanMapTiles[centerIndex][centerIndex + 1].getTerrain() == Terrain.ROCK) {
+							Coord beforeLoc = getCurrentLocation();
 							takeDiversion(currentDir);
+							Coord afterLoc = getCurrentLocation();
+							currSouthSteps = currSouthSteps - (afterLoc.ypos - beforeLoc.ypos);
+							currWestSteps = currWestSteps - (beforeLoc.xpos - afterLoc.xpos);
+							if (currSouthSteps > 0) {
+								currentDir = Direction.SOUTH;
+							} else {
+								currentDir = Direction.WEST;
+							}
 						} else {
 							System.out.println("======> Loc before move south: " + getCurrentLocation());
 							moveSouth();
@@ -173,8 +201,8 @@ public class ROVER_03 extends Rover {
 							currSouthSteps--;
 						}
 					}
-					if (currSouthSteps == 0) {
-						southSteps += 1;
+					if (currSouthSteps <= 0) {
+						southSteps += 2;
 						currSouthSteps = southSteps;
 						currentDir = Direction.WEST;
 					}
@@ -182,7 +210,16 @@ public class ROVER_03 extends Rover {
 					if (currWestSteps > 0) {
 						if (scanMapTiles[centerIndex - 1][centerIndex].getHasRover()
 								|| scanMapTiles[centerIndex - 1][centerIndex].getTerrain() == Terrain.ROCK) {
+							Coord beforeLoc = getCurrentLocation();
 							takeDiversion(currentDir);
+							Coord afterLoc = getCurrentLocation();
+							currWestSteps = currWestSteps - (beforeLoc.xpos - afterLoc.xpos);
+							currNorthSteps = currNorthSteps - (beforeLoc.ypos - afterLoc.ypos);
+							if (currWestSteps > 0) {
+								currentDir = Direction.WEST;
+							} else {
+								currentDir = Direction.NORTH;
+							}
 						} else {
 							System.out.println("======> Loc before move west: " + getCurrentLocation());
 							moveWest();
@@ -190,8 +227,8 @@ public class ROVER_03 extends Rover {
 							currWestSteps--;
 						}
 					}
-					if (currWestSteps == 0) {
-						westSteps += 1;
+					if (currWestSteps <= 0) {
+						westSteps += 2;
 						currWestSteps = westSteps;
 						currentDir = Direction.NORTH;
 					}
