@@ -23,8 +23,8 @@ public class Rover {
 	public String timeRemaining;
 	public Coord currentLoc = null;
 	public Coord previousLoc = null;
-	public Coord StartLocation = null;
-	public Coord TargetLocation = null;
+	public Coord startLocation = null;
+	public Coord targetLocation = null;
 	
 	public ArrayList<String> equipment = new ArrayList<String>();
 	

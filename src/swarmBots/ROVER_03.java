@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import common.Coord;
 import common.MapTile;
 import common.Rover;
 import enums.Terrain;
@@ -34,6 +33,13 @@ public class ROVER_03 extends Rover {
 
 	static enum Direction {
 		NORTH, SOUTH, EAST, WEST;
+	}
+
+	static class Navigation {
+		int northSteps = 1, currNorthSteps = 1;
+		int eastSteps = 1, currEastSteps = 1;
+		int southSteps = 2, currSouthSteps = 2;
+		int westSteps = 2, currWestSteps = 2;
 	}
 
 	/**
@@ -80,17 +86,14 @@ public class ROVER_03 extends Rover {
 
 			// **** Request START_LOC Location from SwarmServer **** this might
 			// be dropped as it should be (0, 0)
-			StartLocation = getStartLocation();
-			System.out.println(rovername + " START_LOC " + StartLocation);
+			startLocation = getStartLocation();
+			System.out.println(rovername + " START_LOC " + startLocation);
 
 			// **** Request TARGET_LOC Location from SwarmServer ****
-			TargetLocation = getTargetLocation();
-			System.out.println(rovername + " TARGET_LOC " + TargetLocation);
+			targetLocation = getTargetLocation();
+			System.out.println(rovername + " TARGET_LOC " + targetLocation);
 
-			int northSteps = 1, currNorthSteps = 1;
-			int eastSteps = 1, currEastSteps = 1;
-			int southSteps = 2, currSouthSteps = 2;
-			int westSteps = 2, currWestSteps = 2;
+			Navigation navigation = new Navigation();
 
 			/**
 			 * #### Rover controller process loop ####
@@ -119,25 +122,13 @@ public class ROVER_03 extends Rover {
 				// ***** get TIMER time remaining *****
 				timeRemaining = getTimeRemaining();
 
-				System.out.println("============ DEBUG ===============");
-				System.out.println("currLoc: " + getCurrentLocation());
-				System.out.println("northSteps = " + northSteps + ", currNorthSteps = " + currNorthSteps);
-				System.out.println("eastSteps = " + eastSteps + ", currEastSteps = " + currEastSteps);
-				System.out.println("southSteps = " + southSteps + ", currSouthSteps = " + currSouthSteps);
-				System.out.println("westSteps = " + westSteps + ", currWestSteps = " + currWestSteps);
-				System.out.println("==================================");
-
 				// ***** MOVING *****
 				if (currentDir == Direction.NORTH) {
-					if (currNorthSteps > 0) {
+					if (navigation.currNorthSteps > 0) {
 						if (scanMapTiles[centerIndex][centerIndex - 1].getHasRover()
 								|| scanMapTiles[centerIndex][centerIndex - 1].getTerrain() == Terrain.ROCK) {
-							Coord beforeLoc = getCurrentLocation();
-							takeDiversion(currentDir);
-							Coord afterLoc = getCurrentLocation();
-							currNorthSteps = currNorthSteps - (beforeLoc.ypos - afterLoc.ypos);
-							currEastSteps = currEastSteps - (afterLoc.xpos - beforeLoc.xpos);
-							if (currNorthSteps > 0) {
+							takeDiversion(currentDir, navigation);
+							if (navigation.currNorthSteps > 0) {
 								currentDir = Direction.NORTH;
 							} else {
 								currentDir = Direction.EAST;
@@ -146,24 +137,20 @@ public class ROVER_03 extends Rover {
 							System.out.println("======> Loc before move north: " + getCurrentLocation());
 							moveNorth();
 							System.out.println("------> Loc after move north: " + getCurrentLocation());
-							currNorthSteps--;
+							navigation.currNorthSteps--;
 						}
 					}
-					if (currNorthSteps <= 0) {
-						northSteps += 2;
-						currNorthSteps = northSteps;
+					if (navigation.currNorthSteps <= 0) {
+						navigation.northSteps += 2;
+						navigation.currNorthSteps = navigation.northSteps;
 						currentDir = Direction.EAST;
 					}
 				} else if (currentDir == Direction.EAST) {
-					if (currEastSteps > 0) {
+					if (navigation.currEastSteps > 0) {
 						if (scanMapTiles[centerIndex + 1][centerIndex].getHasRover()
 								|| scanMapTiles[centerIndex + 1][centerIndex].getTerrain() == Terrain.ROCK) {
-							Coord beforeLoc = getCurrentLocation();
-							takeDiversion(currentDir);
-							Coord afterLoc = getCurrentLocation();
-							currEastSteps = currEastSteps - (afterLoc.xpos - beforeLoc.xpos);
-							currSouthSteps = currSouthSteps - (afterLoc.ypos - beforeLoc.ypos);
-							if (currEastSteps > 0) {
+							takeDiversion(currentDir, navigation);
+							if (navigation.currEastSteps > 0) {
 								currentDir = Direction.EAST;
 							} else {
 								currentDir = Direction.SOUTH;
@@ -172,25 +159,20 @@ public class ROVER_03 extends Rover {
 							System.out.println("======> Loc before move east: " + getCurrentLocation());
 							moveEast();
 							System.out.println("------> Loc after move east: " + getCurrentLocation());
-							currEastSteps--;
+							navigation.currEastSteps--;
 						}
 					}
-					if (currEastSteps <= 0) {
-						eastSteps += 2;
-						currEastSteps = eastSteps;
+					if (navigation.currEastSteps <= 0) {
+						navigation.eastSteps += 2;
+						navigation.currEastSteps = navigation.eastSteps;
 						currentDir = Direction.SOUTH;
 					}
 				} else if (currentDir == Direction.SOUTH) {
-					if (currSouthSteps > 0) {
+					if (navigation.currSouthSteps > 0) {
 						if (scanMapTiles[centerIndex][centerIndex + 1].getHasRover()
-								|| scanMapTiles[centerIndex][centerIndex + 1].getTerrain() == Terrain.ROCK
-								|| scanMapTiles[centerIndex-1][centerIndex + 1].getTerrain() == Terrain.ROCK) {
-							Coord beforeLoc = getCurrentLocation();
-							takeDiversion(currentDir);
-							Coord afterLoc = getCurrentLocation();
-							currSouthSteps = currSouthSteps - (afterLoc.ypos - beforeLoc.ypos);
-							currWestSteps = currWestSteps - (beforeLoc.xpos - afterLoc.xpos);
-							if (currSouthSteps > 0) {
+								|| scanMapTiles[centerIndex][centerIndex + 1].getTerrain() == Terrain.ROCK) {
+							takeDiversion(currentDir, navigation);
+							if (navigation.currSouthSteps > 0) {
 								currentDir = Direction.SOUTH;
 							} else {
 								currentDir = Direction.WEST;
@@ -199,24 +181,20 @@ public class ROVER_03 extends Rover {
 							System.out.println("======> Loc before move south: " + getCurrentLocation());
 							moveSouth();
 							System.out.println("------> Loc after move south: " + getCurrentLocation());
-							currSouthSteps--;
+							navigation.currSouthSteps--;
 						}
 					}
-					if (currSouthSteps <= 0) {
-						southSteps += 2;
-						currSouthSteps = southSteps;
+					if (navigation.currSouthSteps <= 0) {
+						navigation.southSteps += 2;
+						navigation.currSouthSteps = navigation.southSteps;
 						currentDir = Direction.WEST;
 					}
 				} else if (currentDir == Direction.WEST) {
-					if (currWestSteps > 0) {
+					if (navigation.currWestSteps > 0) {
 						if (scanMapTiles[centerIndex - 1][centerIndex].getHasRover()
 								|| scanMapTiles[centerIndex - 1][centerIndex].getTerrain() == Terrain.ROCK) {
-							Coord beforeLoc = getCurrentLocation();
-							takeDiversion(currentDir);
-							Coord afterLoc = getCurrentLocation();
-							currWestSteps = currWestSteps - (beforeLoc.xpos - afterLoc.xpos);
-							currNorthSteps = currNorthSteps - (beforeLoc.ypos - afterLoc.ypos);
-							if (currWestSteps > 0) {
+							takeDiversion(currentDir, navigation);
+							if (navigation.currWestSteps > 0) {
 								currentDir = Direction.WEST;
 							} else {
 								currentDir = Direction.NORTH;
@@ -225,12 +203,12 @@ public class ROVER_03 extends Rover {
 							System.out.println("======> Loc before move west: " + getCurrentLocation());
 							moveWest();
 							System.out.println("------> Loc after move west: " + getCurrentLocation());
-							currWestSteps--;
+							navigation.currWestSteps--;
 						}
 					}
-					if (currWestSteps <= 0) {
-						westSteps += 2;
-						currWestSteps = westSteps;
+					if (navigation.currWestSteps <= 0) {
+						navigation.westSteps += 2;
+						navigation.currWestSteps = navigation.westSteps;
 						currentDir = Direction.NORTH;
 					}
 				}
@@ -261,43 +239,196 @@ public class ROVER_03 extends Rover {
 
 	} // END of Rover run thread
 
-	private void takeDiversion(Direction originalDirection) throws IOException, InterruptedException {
-		Thread.sleep(sleepTime);
-		System.out.println("Taking diversion along " + originalDirection);
+	private void debugNavigation(Navigation navigation) throws IOException {
+		System.out.println("============ DEBUG ===============");
+		System.out.println("currLoc: " + getCurrentLocation());
+		System.out.println("northSteps = " + navigation.northSteps + ", currNorthSteps = " + navigation.currNorthSteps);
+		System.out.println("eastSteps = " + navigation.eastSteps + ", currEastSteps = " + navigation.currEastSteps);
+		System.out.println("southSteps = " + navigation.southSteps + ", currSouthSteps = " + navigation.currSouthSteps);
+		System.out.println("westSteps = " + navigation.westSteps + ", currWestSteps = " + navigation.currWestSteps);
+		System.out.println("==================================");
+	}
 
-		scanMap = doScan();
-		MapTile[][] scanMapTiles = scanMap.getScanMap();
-		int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
-
+	private void takeDiversion(Direction originalDirection, Navigation navigation)
+			throws IOException, InterruptedException {
+		System.out.println("%%%%%%%%%% BEFORE %%%%%%%%%%%%%");
+		debugNavigation(navigation);
+		int originalX = getCurrentLocation().xpos;
+		int originalY = getCurrentLocation().ypos;
 		if (originalDirection == Direction.NORTH) {
-			if (scanMapTiles[centerIndex + 1][centerIndex].getHasRover()
-					|| scanMapTiles[centerIndex + 1][centerIndex].getTerrain() == Terrain.ROCK) {
-				takeDiversion(Direction.EAST);
-			} else {
-				moveEast();
-			}
+			int originalEastSteps = navigation.currEastSteps;
+			int originalWestSteps = navigation.currWestSteps;
+			do {
+				moveAroundTheObstacle(originalDirection, navigation);
+				if (originalEastSteps != navigation.currEastSteps || originalWestSteps != navigation.currWestSteps) {
+					if (getCurrentLocation().xpos == originalX) {
+						break;
+					}
+				}
+				Thread.sleep(sleepTime);
+			} while (navigation.currNorthSteps > 0);
 		} else if (originalDirection == Direction.EAST) {
-			if (scanMapTiles[centerIndex][centerIndex + 1].getHasRover()
-					|| scanMapTiles[centerIndex][centerIndex + 1].getTerrain() == Terrain.ROCK) {
-				takeDiversion(Direction.SOUTH);
-			} else {
-				moveSouth();
-			}
+			int originalNorthSteps = navigation.currNorthSteps;
+			int originalSouthSteps = navigation.currSouthSteps;
+			do {
+				moveAroundTheObstacle(originalDirection, navigation);
+				if (originalNorthSteps != navigation.currNorthSteps
+						|| originalSouthSteps != navigation.currSouthSteps) {
+					if (getCurrentLocation().ypos == originalY) {
+						break;
+					}
+				}
+				Thread.sleep(sleepTime);
+			} while (navigation.currEastSteps > 0);
 		} else if (originalDirection == Direction.SOUTH) {
-			if (scanMapTiles[centerIndex - 1][centerIndex].getHasRover()
-					|| scanMapTiles[centerIndex - 1][centerIndex].getTerrain() == Terrain.ROCK) {
-				takeDiversion(Direction.WEST);
-			} else {
-				moveWest();
-			}
+			int originalEastSteps = navigation.currEastSteps;
+			int originalWestSteps = navigation.currWestSteps;
+			do {
+				moveAroundTheObstacle(originalDirection, navigation);
+				if (originalEastSteps != navigation.currEastSteps || originalWestSteps != navigation.currWestSteps) {
+					if (getCurrentLocation().xpos == originalX) {
+						break;
+					}
+				}
+				Thread.sleep(sleepTime);
+			} while (navigation.currSouthSteps > 0);
 		} else if (originalDirection == Direction.WEST) {
-			if (scanMapTiles[centerIndex][centerIndex - 1].getHasRover()
-					|| scanMapTiles[centerIndex][centerIndex - 1].getTerrain() == Terrain.ROCK) {
-				takeDiversion(Direction.NORTH);
-			} else {
-				moveNorth();
-			}
+			int originalNorthSteps = navigation.currNorthSteps;
+			int originalSouthSteps = navigation.currSouthSteps;
+			do {
+				moveAroundTheObstacle(originalDirection, navigation);
+				if (originalNorthSteps != navigation.currNorthSteps
+						|| originalSouthSteps != navigation.currSouthSteps) {
+					if (getCurrentLocation().ypos == originalY) {
+						break;
+					}
+				}
+				Thread.sleep(sleepTime);
+			} while (navigation.currWestSteps > 0);
 		}
+		System.out.println("%%%%%%%%%% AFTER %%%%%%%%%%%%%");
+		debugNavigation(navigation);
+	}
+
+	private void moveAroundTheObstacle(Direction originalDirection, Navigation navigation) throws IOException {
+		MapTile[][] mapTiles = doScan().getScanMap();
+		Direction directionToMove = getDirectionToMove(mapTiles);
+		System.out.println("$$$$$$$ directionToMove = " + directionToMove);
+		Direction direction = directionToMove == null ? originalDirection : directionToMove;
+		System.out.println("$$$$$$$ direction = " + direction);
+		switch (direction) {
+		case NORTH:
+			moveNorth();
+			// if (originalDirection == Direction.NORTH) {
+			navigation.currNorthSteps--;
+			// }
+			break;
+		case EAST:
+			moveEast();
+			// if (originalDirection == Direction.EAST) {
+			navigation.currEastSteps--;
+			// }
+			break;
+		case SOUTH:
+			moveSouth();
+			// if (originalDirection == Direction.SOUTH) {
+			navigation.currSouthSteps--;
+			// }
+			break;
+		case WEST:
+			moveWest();
+			// if (originalDirection == Direction.WEST) {
+			navigation.currWestSteps--;
+			// }
+			break;
+		default:
+			break;
+		}
+	}
+
+	private boolean isNorthBlocked(MapTile[][] mapTiles) {
+		int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
+		return mapTiles[centerIndex][centerIndex - 1].getHasRover()
+				|| mapTiles[centerIndex][centerIndex - 1].getTerrain() == Terrain.ROCK;
+	}
+
+	private boolean isEastBlocked(MapTile[][] mapTiles) {
+		int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
+		return mapTiles[centerIndex + 1][centerIndex].getHasRover()
+				|| mapTiles[centerIndex + 1][centerIndex].getTerrain() == Terrain.ROCK;
+	}
+
+	private boolean isSouthBlocked(MapTile[][] mapTiles) {
+		int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
+		return mapTiles[centerIndex][centerIndex + 1].getHasRover()
+				|| mapTiles[centerIndex][centerIndex + 1].getTerrain() == Terrain.ROCK;
+	}
+
+	private boolean isWestBlocked(MapTile[][] mapTiles) {
+		int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
+		return mapTiles[centerIndex - 1][centerIndex].getHasRover()
+				|| mapTiles[centerIndex - 1][centerIndex].getTerrain() == Terrain.ROCK;
+	}
+
+	private boolean isNorthEastBlocked(MapTile[][] mapTiles) {
+		int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
+		return mapTiles[centerIndex + 1][centerIndex - 1].getHasRover()
+				|| mapTiles[centerIndex + 1][centerIndex - 1].getTerrain() == Terrain.ROCK;
+	}
+
+	private boolean isNorthWestBlocked(MapTile[][] mapTiles) {
+		int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
+		return mapTiles[centerIndex - 1][centerIndex - 1].getHasRover()
+				|| mapTiles[centerIndex - 1][centerIndex - 1].getTerrain() == Terrain.ROCK;
+	}
+
+	private boolean isSouthEastBlocked(MapTile[][] mapTiles) {
+		int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
+		return mapTiles[centerIndex + 1][centerIndex + 1].getHasRover()
+				|| mapTiles[centerIndex + 1][centerIndex + 1].getTerrain() == Terrain.ROCK;
+	}
+
+	private boolean isSouthWestBlocked(MapTile[][] mapTiles) {
+		int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
+		return mapTiles[centerIndex - 1][centerIndex + 1].getHasRover()
+				|| mapTiles[centerIndex - 1][centerIndex + 1].getTerrain() == Terrain.ROCK;
+	}
+
+	private Direction getDirectionToMove(MapTile[][] mapTiles) {
+		if (isNorthBlocked(mapTiles)) {
+			if (isEastBlocked(mapTiles)) {
+				return Direction.SOUTH;
+			} else {
+				return Direction.EAST;
+			}
+		} else if (isEastBlocked(mapTiles)) {
+			if (isSouthBlocked(mapTiles)) {
+				return Direction.WEST;
+			} else {
+				return Direction.SOUTH;
+			}
+		} else if (isSouthBlocked(mapTiles)) {
+			if (isWestBlocked(mapTiles)) {
+				return Direction.NORTH;
+			} else {
+				return Direction.WEST;
+			}
+		} else if (isWestBlocked(mapTiles)) {
+			if (isNorthBlocked(mapTiles)) {
+				return Direction.EAST;
+			} else {
+				return Direction.NORTH;
+			}
+		} else if (isNorthEastBlocked(mapTiles)) {
+			return Direction.EAST;
+		} else if (isNorthWestBlocked(mapTiles)) {
+			return Direction.NORTH;
+		} else if (isSouthEastBlocked(mapTiles)) {
+			return Direction.SOUTH;
+		} else if (isSouthWestBlocked(mapTiles)) {
+			return Direction.WEST;
+		}
+		return null;
 	}
 
 	// ####################### Support Methods #############################
