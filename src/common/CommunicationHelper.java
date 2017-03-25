@@ -10,71 +10,71 @@ import enums.Terrain;
  */
 public class CommunicationHelper {
 
-    public static MapTile convertToMapTile(JSONObject o){
-        Terrain terrain = getTerrain((String) o.get("terrain"));
-        Science science = getScience((String) o.get("science"));
-        MapTile tile = new MapTile(terrain, science, false);
-        return tile;
-    }
+	public static MapTile convertToMapTile(JSONObject o) {
+		Terrain terrain = getTerrain((String) o.get("terrain"));
+		Science science = getScience((String) o.get("science"));
+		String roverId = (o.get("roverid") != null ? Long.toString((long) o.get("roverid")) : null);
+		MapTile tile = new MapTile(terrain, science, (roverId != null), roverId);
+		return tile;
+	}
 
-    public static Terrain getTerrain(String str) {
-        Terrain output;
+	public static Terrain getTerrain(String str) {
+		Terrain output;
 
-        switch (str) {
-            case "NONE":
-                output = Terrain.NONE;
-                break;
-            case "ROCK":
-                output = Terrain.ROCK;
-                break;
-            case "SOIL":
-                output = Terrain.SOIL;
-                break;
-            case "GRAVEL":
-                output = Terrain.GRAVEL;
-                break;
-            case "SAND":
-                output = Terrain.SAND;
-                break;
-            case "FLUID":
-                output = Terrain.FLUID;
-                break;
+		switch (str) {
+		case "NONE":
+			output = Terrain.NONE;
+			break;
+		case "ROCK":
+			output = Terrain.ROCK;
+			break;
+		case "SOIL":
+			output = Terrain.SOIL;
+			break;
+		case "GRAVEL":
+			output = Terrain.GRAVEL;
+			break;
+		case "SAND":
+			output = Terrain.SAND;
+			break;
+		case "FLUID":
+			output = Terrain.FLUID;
+			break;
 
-            default:
-                output = Terrain.NONE;
-        }
-        return output;
+		default:
+			output = Terrain.NONE;
+		}
+		return output;
 
-    }
+	}
 
-    public static Science getScience(String input){
-        Science output;
+	public static Science getScience(String input) {
+		Science output;
 
-        switch(input){
-            case "NONE":
-                output = Science.NONE;
-                break;
-            case "RADIOACTIVE":
-                output = Science.RADIOACTIVE;
-                break;
-            case "ORGANIC":
-                output = Science.ORGANIC;
-                break;
-            case "MINERAL":
-                output = Science.MINERAL;
-                break;
-            case "ARTIFACT":
-                output = Science.ARTIFACT;
-                break;
-            case "CRYSTAL":
-                output = Science.CRYSTAL;
-                break;
+		switch (input) {
+		case "NONE":
+			output = Science.NONE;
+			break;
+		case "RADIOACTIVE":
+			output = Science.RADIOACTIVE;
+			break;
+		case "ORGANIC":
+			output = Science.ORGANIC;
+			break;
+		case "MINERAL":
+			output = Science.MINERAL;
+			break;
+		case "ARTIFACT":
+			output = Science.ARTIFACT;
+			break;
+		case "CRYSTAL":
+			output = Science.CRYSTAL;
+			break;
 
-            default:
-                output = Science.NONE;
-        }
-        return output;
-    }
-
+		default:
+			output = Science.NONE;
+		}
+		return output;
+	}
 
 }
