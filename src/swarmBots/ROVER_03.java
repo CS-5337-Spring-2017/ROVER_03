@@ -5,8 +5,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Stack;
 
 import common.Communication;
+import common.Coord;
 import common.MapTile;
 import common.Rover;
 import enums.Terrain;
@@ -36,12 +43,24 @@ public class ROVER_03 extends Rover {
 		NORTH, SOUTH, EAST, WEST;
 	}
 
-	static class Navigation {
-		int northSteps = 1, currNorthSteps = 1;
-		int eastSteps = 1, currEastSteps = 1;
-		int southSteps = 2, currSouthSteps = 2;
-		int westSteps = 2, currWestSteps = 2;
+	static class MoveTargetLocation {
+		Coord targetCoord;
+		Direction d;
 	}
+
+	static Map<Coord, Integer> coordVisitCountMap = new HashMap<Coord, Integer>() {
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public Integer get(Object key) {
+			if (!containsKey(key)) {
+				super.put((Coord) key, new Integer(0));
+			}
+			return super.get(key);
+		}
+	};
+
+	Coord maxCoord = new Coord(0, 0);
 
 	/**
 	 * Connects to the server then enters the processing loop.
@@ -78,11 +97,6 @@ public class ROVER_03 extends Rover {
 			}
 
 			/**
-			 * ### Setting up variables to be used in the Rover control loop ###
-			 */
-			Direction currentDir = Direction.NORTH;
-
-			/**
 			 * ### Retrieve static values from RCP ###
 			 */
 			// **** get equipment listing ****
@@ -98,8 +112,6 @@ public class ROVER_03 extends Rover {
 			targetLocation = getTargetLocation();
 			System.out.println(rovername + " TARGET_LOC " + targetLocation);
 
-			Navigation navigation = new Navigation();
-
 			/**
 			 * #### Rover controller process loop ####
 			 */
@@ -108,7 +120,7 @@ public class ROVER_03 extends Rover {
 				// **** Request Rover Location from RCP ****
 				currentLoc = getCurrentLocation();
 
-				System.out.println(rovername + " currentLoc at start: " + currentLoc);
+				System.out.println(rovername + " currentLoc at start: " + currentLoc + " maxCoord: " + maxCoord);
 
 				// after getting location set previous equal current to be able
 				// to check for stuckness and blocked later
@@ -122,106 +134,48 @@ public class ROVER_03 extends Rover {
 				scanMap.debugPrintMap();
 
 				MapTile[][] scanMapTiles = scanMap.getScanMap();
-				int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
+				int mapTileCenter = (scanMap.getEdgeSize() - 1) / 2;
+				Coord currentLocInMapTile = new Coord(mapTileCenter, mapTileCenter);
 
-				communication.postScanMapTiles(currentLoc, scanMapTiles);
-
-				// ***** get TIMER time remaining *****
-				timeRemaining = getTimeRemaining();
-
-				// ***** MOVING *****
-				if (currentDir == Direction.NORTH) {
-					if (navigation.currNorthSteps > 0) {
-						if (scanMapTiles[centerIndex][centerIndex - 1].getHasRover()
-								|| scanMapTiles[centerIndex][centerIndex - 1].getTerrain() == Terrain.ROCK) {
-							takeDiversion(currentDir, navigation);
-							if (navigation.currNorthSteps > 0) {
-								currentDir = Direction.NORTH;
-							} else {
-								currentDir = Direction.EAST;
-							}
-						} else {
-							System.out.println("======> Loc before move north: " + getCurrentLocation());
-							moveNorth();
-							System.out.println("------> Loc after move north: " + getCurrentLocation());
-							navigation.currNorthSteps--;
-						}
-					}
-					if (navigation.currNorthSteps <= 0) {
-						navigation.northSteps += 2;
-						navigation.currNorthSteps = navigation.northSteps;
-						currentDir = Direction.EAST;
-					}
-				} else if (currentDir == Direction.EAST) {
-					if (navigation.currEastSteps > 0) {
-						if (scanMapTiles[centerIndex + 1][centerIndex].getHasRover()
-								|| scanMapTiles[centerIndex + 1][centerIndex].getTerrain() == Terrain.ROCK) {
-							takeDiversion(currentDir, navigation);
-							if (navigation.currEastSteps > 0) {
-								currentDir = Direction.EAST;
-							} else {
-								currentDir = Direction.SOUTH;
-							}
-						} else {
-							System.out.println("======> Loc before move east: " + getCurrentLocation());
-							moveEast();
-							System.out.println("------> Loc after move east: " + getCurrentLocation());
-							navigation.currEastSteps--;
-						}
-					}
-					if (navigation.currEastSteps <= 0) {
-						navigation.eastSteps += 2;
-						navigation.currEastSteps = navigation.eastSteps;
-						currentDir = Direction.SOUTH;
-					}
-				} else if (currentDir == Direction.SOUTH) {
-					if (navigation.currSouthSteps > 0) {
-						if (scanMapTiles[centerIndex][centerIndex + 1].getHasRover()
-								|| scanMapTiles[centerIndex][centerIndex + 1].getTerrain() == Terrain.ROCK) {
-							takeDiversion(currentDir, navigation);
-							if (navigation.currSouthSteps > 0) {
-								currentDir = Direction.SOUTH;
-							} else {
-								currentDir = Direction.WEST;
-							}
-						} else {
-							System.out.println("======> Loc before move south: " + getCurrentLocation());
-							moveSouth();
-							System.out.println("------> Loc after move south: " + getCurrentLocation());
-							navigation.currSouthSteps--;
-						}
-					}
-					if (navigation.currSouthSteps <= 0) {
-						navigation.southSteps += 2;
-						navigation.currSouthSteps = navigation.southSteps;
-						currentDir = Direction.WEST;
-					}
-				} else if (currentDir == Direction.WEST) {
-					if (navigation.currWestSteps > 0) {
-						if (scanMapTiles[centerIndex - 1][centerIndex].getHasRover()
-								|| scanMapTiles[centerIndex - 1][centerIndex].getTerrain() == Terrain.ROCK) {
-							takeDiversion(currentDir, navigation);
-							if (navigation.currWestSteps > 0) {
-								currentDir = Direction.WEST;
-							} else {
-								currentDir = Direction.NORTH;
-							}
-						} else {
-							System.out.println("======> Loc before move west: " + getCurrentLocation());
-							moveWest();
-							System.out.println("------> Loc after move west: " + getCurrentLocation());
-							navigation.currWestSteps--;
-						}
-					}
-					if (navigation.currWestSteps <= 0) {
-						navigation.westSteps += 2;
-						navigation.currWestSteps = navigation.westSteps;
-						currentDir = Direction.NORTH;
-					}
+				int maxX = currentLoc.xpos + mapTileCenter;
+				int maxY = currentLoc.ypos + mapTileCenter;
+				if (maxCoord.xpos < maxX && maxCoord.ypos < maxY) {
+					maxCoord = new Coord(maxX, maxY);
+				} else if (maxCoord.xpos < maxX) {
+					maxCoord = new Coord(maxX, maxCoord.ypos);
+				} else if (maxCoord.ypos < maxY) {
+					maxCoord = new Coord(maxCoord.xpos, maxY);
 				}
 
-				// another call for current location
-				currentLoc = getCurrentLocation();
+				// ***** MOVING *****
+				MoveTargetLocation moveTargetLocation = chooseMoveTargetLocation(scanMapTiles, currentLocInMapTile,
+						currentLoc, mapTileCenter);
+				switch (moveTargetLocation.d) {
+				case NORTH:
+					moveNorth();
+					break;
+				case EAST:
+					moveEast();
+					break;
+				case SOUTH:
+					moveSouth();
+					break;
+				case WEST:
+					moveWest();
+					break;
+				}
+
+				if (!previousLoc.equals(getCurrentLocation())) {
+					coordVisitCountMap.put(moveTargetLocation.targetCoord,
+							coordVisitCountMap.get(moveTargetLocation.targetCoord) + 1);
+				}
+
+				try {
+					communication.postScanMapTiles(currentLoc, scanMapTiles);
+				} catch (Exception e) {
+					System.err.println("Post current map to communication server failed. Cause: "
+							+ e.getClass().getName() + ": " + e.getMessage());
+				}
 
 				// this is the Rovers HeartBeat, it regulates how fast the Rover
 				// cycles through the control loop
@@ -246,196 +200,136 @@ public class ROVER_03 extends Rover {
 
 	} // END of Rover run thread
 
-	private void debugNavigation(Navigation navigation) throws IOException {
-		System.out.println("============ DEBUG ===============");
-		System.out.println("currLoc: " + getCurrentLocation());
-		System.out.println("northSteps = " + navigation.northSteps + ", currNorthSteps = " + navigation.currNorthSteps);
-		System.out.println("eastSteps = " + navigation.eastSteps + ", currEastSteps = " + navigation.currEastSteps);
-		System.out.println("southSteps = " + navigation.southSteps + ", currSouthSteps = " + navigation.currSouthSteps);
-		System.out.println("westSteps = " + navigation.westSteps + ", currWestSteps = " + navigation.currWestSteps);
-		System.out.println("==================================");
+	private Coord getCoordNorthOf(Coord c) {
+		return new Coord(c.xpos, c.ypos - 1);
 	}
 
-	private void takeDiversion(Direction originalDirection, Navigation navigation)
-			throws IOException, InterruptedException {
-		System.out.println("%%%%%%%%%% BEFORE %%%%%%%%%%%%%");
-		debugNavigation(navigation);
-		int originalX = getCurrentLocation().xpos;
-		int originalY = getCurrentLocation().ypos;
-		if (originalDirection == Direction.NORTH) {
-			int originalEastSteps = navigation.currEastSteps;
-			int originalWestSteps = navigation.currWestSteps;
-			do {
-				moveAroundTheObstacle(originalDirection, navigation);
-				if (originalEastSteps != navigation.currEastSteps || originalWestSteps != navigation.currWestSteps) {
-					if (getCurrentLocation().xpos == originalX) {
-						break;
-					}
+	private Coord getCoordEastOf(Coord c) {
+		return new Coord(c.xpos + 1, c.ypos);
+	}
+
+	private Coord getCoordSouthOf(Coord c) {
+		return new Coord(c.xpos, c.ypos + 1);
+	}
+
+	private Coord getCoordWestOf(Coord c) {
+		return new Coord(c.xpos - 1, c.ypos);
+	}
+
+	private boolean isBlocked(MapTile[][] mapTiles, Coord c) {
+		return mapTiles[c.xpos][c.ypos].getHasRover() || mapTiles[c.xpos][c.ypos].getTerrain() == Terrain.ROCK
+				|| mapTiles[c.xpos][c.ypos].getTerrain() == Terrain.NONE;
+	}
+
+	private MoveTargetLocation chooseMoveTargetLocation(MapTile[][] scanMapTiles, Coord currentLocInMapTile,
+			Coord currentLoc, int mapTileCenter) {
+		Coord northCoordInMapTile = getCoordNorthOf(currentLocInMapTile);
+		Coord eastCoordInMapTile = getCoordEastOf(currentLocInMapTile);
+		Coord southCoordInMapTile = getCoordSouthOf(currentLocInMapTile);
+		Coord westCoordInMapTile = getCoordWestOf(currentLocInMapTile);
+
+		Coord northCoord = getCoordNorthOf(currentLoc);
+		Coord eastCoord = getCoordEastOf(currentLoc);
+		Coord southCoord = getCoordSouthOf(currentLoc);
+		Coord westCoord = getCoordWestOf(currentLoc);
+
+		int min = Integer.MAX_VALUE;
+
+		MoveTargetLocation moveTargetLocation = new MoveTargetLocation();
+
+		Stack<Direction> favoredDirStack = getFavoredDirStack(currentLoc, mapTileCenter);
+
+		while (!favoredDirStack.isEmpty()) {
+			Direction d = favoredDirStack.pop();
+			switch (d) {
+			case NORTH:
+				if (!isBlocked(scanMapTiles, northCoordInMapTile) && coordVisitCountMap.get(northCoord) < min) {
+					min = coordVisitCountMap.get(northCoord);
+					moveTargetLocation.targetCoord = northCoord;
+					moveTargetLocation.d = Direction.NORTH;
 				}
-				Thread.sleep(sleepTime);
-			} while (navigation.currNorthSteps > 0);
-		} else if (originalDirection == Direction.EAST) {
-			int originalNorthSteps = navigation.currNorthSteps;
-			int originalSouthSteps = navigation.currSouthSteps;
-			do {
-				moveAroundTheObstacle(originalDirection, navigation);
-				if (originalNorthSteps != navigation.currNorthSteps
-						|| originalSouthSteps != navigation.currSouthSteps) {
-					if (getCurrentLocation().ypos == originalY) {
-						break;
-					}
+				break;
+			case EAST:
+				if (!isBlocked(scanMapTiles, eastCoordInMapTile) && coordVisitCountMap.get(eastCoord) < min) {
+					min = coordVisitCountMap.get(eastCoord);
+					moveTargetLocation.targetCoord = eastCoord;
+					moveTargetLocation.d = Direction.EAST;
 				}
-				Thread.sleep(sleepTime);
-			} while (navigation.currEastSteps > 0);
-		} else if (originalDirection == Direction.SOUTH) {
-			int originalEastSteps = navigation.currEastSteps;
-			int originalWestSteps = navigation.currWestSteps;
-			do {
-				moveAroundTheObstacle(originalDirection, navigation);
-				if (originalEastSteps != navigation.currEastSteps || originalWestSteps != navigation.currWestSteps) {
-					if (getCurrentLocation().xpos == originalX) {
-						break;
-					}
+				break;
+			case SOUTH:
+				if (!isBlocked(scanMapTiles, southCoordInMapTile) && coordVisitCountMap.get(southCoord) < min) {
+					min = coordVisitCountMap.get(southCoord);
+					moveTargetLocation.targetCoord = southCoord;
+					moveTargetLocation.d = Direction.SOUTH;
 				}
-				Thread.sleep(sleepTime);
-			} while (navigation.currSouthSteps > 0);
-		} else if (originalDirection == Direction.WEST) {
-			int originalNorthSteps = navigation.currNorthSteps;
-			int originalSouthSteps = navigation.currSouthSteps;
-			do {
-				moveAroundTheObstacle(originalDirection, navigation);
-				if (originalNorthSteps != navigation.currNorthSteps
-						|| originalSouthSteps != navigation.currSouthSteps) {
-					if (getCurrentLocation().ypos == originalY) {
-						break;
-					}
+				break;
+			case WEST:
+				if (!isBlocked(scanMapTiles, westCoordInMapTile) && coordVisitCountMap.get(westCoord) < min) {
+					min = coordVisitCountMap.get(westCoord);
+					moveTargetLocation.targetCoord = westCoord;
+					moveTargetLocation.d = Direction.WEST;
 				}
-				Thread.sleep(sleepTime);
-			} while (navigation.currWestSteps > 0);
+			}
 		}
-		System.out.println("%%%%%%%%%% AFTER %%%%%%%%%%%%%");
-		debugNavigation(navigation);
+		printMoveTargetLocation(moveTargetLocation);
+		return moveTargetLocation;
 	}
 
-	private void moveAroundTheObstacle(Direction originalDirection, Navigation navigation) throws IOException {
-		MapTile[][] mapTiles = doScan().getScanMap();
-		Direction directionToMove = getDirectionToMove(mapTiles);
-		System.out.println("$$$$$$$ directionToMove = " + directionToMove);
-		Direction direction = directionToMove == null ? originalDirection : directionToMove;
-		System.out.println("$$$$$$$ direction = " + direction);
-		switch (direction) {
-		case NORTH:
-			moveNorth();
-			// if (originalDirection == Direction.NORTH) {
-			navigation.currNorthSteps--;
-			// }
-			break;
-		case EAST:
-			moveEast();
-			// if (originalDirection == Direction.EAST) {
-			navigation.currEastSteps--;
-			// }
-			break;
-		case SOUTH:
-			moveSouth();
-			// if (originalDirection == Direction.SOUTH) {
-			navigation.currSouthSteps--;
-			// }
-			break;
-		case WEST:
-			moveWest();
-			// if (originalDirection == Direction.WEST) {
-			navigation.currWestSteps--;
-			// }
-			break;
-		default:
-			break;
+	private Stack<Direction> getFavoredDirStack(Coord currentLoc, int mapTileCenter) {
+		int northUnvisitedCount = 0, eastUnvisitedCount = 0, southUnvisitedCount = 0, westUnvisitedCount = 0;
+		for (int x = 0; x < currentLoc.xpos; x++) {
+			if (coordVisitCountMap.get(new Coord(x, currentLoc.ypos)) == 0) {
+				westUnvisitedCount++;
+			}
 		}
-	}
-
-	private boolean isNorthBlocked(MapTile[][] mapTiles) {
-		int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
-		return mapTiles[centerIndex][centerIndex - 1].getHasRover()
-				|| mapTiles[centerIndex][centerIndex - 1].getTerrain() == Terrain.ROCK;
-	}
-
-	private boolean isEastBlocked(MapTile[][] mapTiles) {
-		int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
-		return mapTiles[centerIndex + 1][centerIndex].getHasRover()
-				|| mapTiles[centerIndex + 1][centerIndex].getTerrain() == Terrain.ROCK;
-	}
-
-	private boolean isSouthBlocked(MapTile[][] mapTiles) {
-		int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
-		return mapTiles[centerIndex][centerIndex + 1].getHasRover()
-				|| mapTiles[centerIndex][centerIndex + 1].getTerrain() == Terrain.ROCK;
-	}
-
-	private boolean isWestBlocked(MapTile[][] mapTiles) {
-		int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
-		return mapTiles[centerIndex - 1][centerIndex].getHasRover()
-				|| mapTiles[centerIndex - 1][centerIndex].getTerrain() == Terrain.ROCK;
-	}
-
-	private boolean isNorthEastBlocked(MapTile[][] mapTiles) {
-		int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
-		return mapTiles[centerIndex + 1][centerIndex - 1].getHasRover()
-				|| mapTiles[centerIndex + 1][centerIndex - 1].getTerrain() == Terrain.ROCK;
-	}
-
-	private boolean isNorthWestBlocked(MapTile[][] mapTiles) {
-		int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
-		return mapTiles[centerIndex - 1][centerIndex - 1].getHasRover()
-				|| mapTiles[centerIndex - 1][centerIndex - 1].getTerrain() == Terrain.ROCK;
-	}
-
-	private boolean isSouthEastBlocked(MapTile[][] mapTiles) {
-		int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
-		return mapTiles[centerIndex + 1][centerIndex + 1].getHasRover()
-				|| mapTiles[centerIndex + 1][centerIndex + 1].getTerrain() == Terrain.ROCK;
-	}
-
-	private boolean isSouthWestBlocked(MapTile[][] mapTiles) {
-		int centerIndex = (scanMap.getEdgeSize() - 1) / 2;
-		return mapTiles[centerIndex - 1][centerIndex + 1].getHasRover()
-				|| mapTiles[centerIndex - 1][centerIndex + 1].getTerrain() == Terrain.ROCK;
-	}
-
-	private Direction getDirectionToMove(MapTile[][] mapTiles) {
-		if (isNorthBlocked(mapTiles)) {
-			if (isEastBlocked(mapTiles)) {
-				return Direction.SOUTH;
-			} else {
-				return Direction.EAST;
+		for (int x = currentLoc.xpos; x < maxCoord.xpos; x++) {
+			if (coordVisitCountMap.get(new Coord(x, currentLoc.ypos)) == 0) {
+				eastUnvisitedCount++;
 			}
-		} else if (isEastBlocked(mapTiles)) {
-			if (isSouthBlocked(mapTiles)) {
-				return Direction.WEST;
-			} else {
-				return Direction.SOUTH;
-			}
-		} else if (isSouthBlocked(mapTiles)) {
-			if (isWestBlocked(mapTiles)) {
-				return Direction.NORTH;
-			} else {
-				return Direction.WEST;
-			}
-		} else if (isWestBlocked(mapTiles)) {
-			if (isNorthBlocked(mapTiles)) {
-				return Direction.EAST;
-			} else {
-				return Direction.NORTH;
-			}
-		} else if (isNorthEastBlocked(mapTiles)) {
-			return Direction.EAST;
-		} else if (isNorthWestBlocked(mapTiles)) {
-			return Direction.NORTH;
-		} else if (isSouthEastBlocked(mapTiles)) {
-			return Direction.SOUTH;
-		} else if (isSouthWestBlocked(mapTiles)) {
-			return Direction.WEST;
 		}
-		return null;
+		for (int y = 0; y < currentLoc.ypos; y++) {
+			if (coordVisitCountMap.get(new Coord(currentLoc.xpos, y)) == 0) {
+				northUnvisitedCount++;
+			}
+		}
+		for (int y = currentLoc.ypos; y < maxCoord.ypos; y++) {
+			if (coordVisitCountMap.get(new Coord(currentLoc.xpos, y)) == 0) {
+				southUnvisitedCount++;
+			}
+		}
+		List<Integer> countList = Arrays.asList(northUnvisitedCount, eastUnvisitedCount, southUnvisitedCount,
+				westUnvisitedCount);
+		Collections.sort(countList);
+
+		Stack<Direction> directionStack = new Stack<>();
+
+		for (Integer count : countList) {
+			if (count == northUnvisitedCount && !directionStack.contains(Direction.NORTH)) {
+				directionStack.push(Direction.NORTH);
+			}
+			if (count == eastUnvisitedCount && !directionStack.contains(Direction.EAST)) {
+				directionStack.push(Direction.EAST);
+			}
+			if (count == southUnvisitedCount && !directionStack.contains(Direction.SOUTH)) {
+				directionStack.push(Direction.SOUTH);
+			}
+			if (count == westUnvisitedCount && !directionStack.contains(Direction.WEST)) {
+				directionStack.push(Direction.WEST);
+			}
+		}
+		System.out.println("counts = North(" + northUnvisitedCount + ") East(" + eastUnvisitedCount + ") South("
+				+ southUnvisitedCount + ") West(" + westUnvisitedCount + ")");
+		System.out.println("countList = " + countList);
+		System.out.println("favoredDirStack = " + directionStack);
+		System.out.println("coordVisitCountMap = " + coordVisitCountMap);
+
+		return directionStack;
+	}
+
+	private void printMoveTargetLocation(MoveTargetLocation moveTargetLocation) {
+		System.out.println("MoveTargetLocation.x = " + moveTargetLocation.targetCoord.xpos);
+		System.out.println("MoveTargetLocation.y = " + moveTargetLocation.targetCoord.ypos);
+		System.out.println("MoveTargetLocation.d = " + moveTargetLocation.d);
 	}
 
 	// ####################### Support Methods #############################

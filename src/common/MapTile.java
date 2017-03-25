@@ -1,73 +1,80 @@
 package common;
 
-import enums.RoverConfiguration;
 import enums.Science;
 import enums.Terrain;
 
 public class MapTile {
 	private Terrain terrain;
-	public int elevation = 0;	// not currently used
-	public int count = 0;  //undefined usage, possibly use on ScanMap for tracking visits
-	private Science science;	//for use on ScanMap, not used on PlanetMap
-	private boolean hasRover;	//for use on ScanMap, not used on PlanetMap
-	private String scannedBy = null; //for keeping track of which rover first discovered this tile
-	
-	public MapTile(){
+	public int elevation = 0; // not currently used
+	public int count = 0; // undefined usage, possibly use on ScanMap for
+							// tracking visits
+	private Science science; // for use on ScanMap, not used on PlanetMap
+	private boolean hasRover; // for use on ScanMap, not used on PlanetMap
+	private String scannedBy = null; // for keeping track of which rover first
+										// discovered this tile
+	private String roverId = null; // for storing the id of the rover in the
+									// current tile if any.
+
+	public MapTile() {
 		this.terrain = Terrain.SOIL;
 		this.science = Science.NONE;
 		this.hasRover = false;
 	}
-	
-	public MapTile(int notUsed){
+
+	public MapTile(int notUsed) {
 		// use any integer as an argument to create MapTile with no terrain
 		this.terrain = Terrain.NONE;
 		this.science = Science.NONE;
 		this.hasRover = false;
 	}
-	
-	public MapTile(String terrainLetter){
+
+	public MapTile(String terrainLetter) {
 		// use appropriate string to create MapTile with matching terrain
 		this.terrain = Terrain.getEnum(terrainLetter);
 		this.science = Science.NONE;
 		this.hasRover = false;
 	}
-	
-	public MapTile(Terrain ter, int elev){
+
+	public MapTile(Terrain ter, int elev) {
 		this.terrain = ter;
 		this.science = Science.NONE;
 		this.elevation = elev;
 		this.hasRover = false;
 	}
-	
-	public MapTile(Terrain ter, Science sci, boolean hasR){
+
+	public MapTile(Terrain ter, Science sci, boolean hasR, String roverId) {
 		this.terrain = ter;
 		this.science = sci;
 		this.hasRover = hasR;
+		this.roverId = roverId;
 	}
-	
-	public MapTile(Terrain ter, Science sci, int elev, boolean hasR){
+
+	public MapTile(Terrain ter, Science sci, int elev, boolean hasR, String roverId) {
 		this.terrain = ter;
 		this.science = sci;
 		this.elevation = elev;
 		this.hasRover = hasR;
+		this.roverId = roverId;
 	}
-	
-	public MapTile(Terrain ter, Science sci, int elev, boolean hasR, String scanBy, int cnt){
+
+	public MapTile(Terrain ter, Science sci, int elev, boolean hasR, String roverId, String scanBy, int cnt) {
 		this.terrain = ter;
 		this.science = sci;
 		this.elevation = elev;
 		this.hasRover = hasR;
+		this.roverId = roverId;
 		this.count = cnt;
 		this.scannedBy = scanBy;
 	}
-	
-	public MapTile getCopyOfMapTile(){
-		MapTile rTile = new MapTile(this.terrain, this.science, this.elevation, this.hasRover, this.scannedBy, this.count);	
+
+	public MapTile getCopyOfMapTile() {
+		MapTile rTile = new MapTile(this.terrain, this.science, this.elevation, this.hasRover, this.roverId,
+				this.scannedBy, this.count);
 		return rTile;
 	}
 
 	// No setters in this class to make it thread safe
-	
+
 	public Terrain getTerrain() {
 		return this.terrain;
 	}
@@ -79,31 +86,35 @@ public class MapTile {
 	public int getElevation() {
 		return this.elevation;
 	}
-	
+
 	public boolean getHasRover() {
 		return this.hasRover;
 	}
-	
+
+	public String getRoverId() {
+		return this.roverId;
+	}
+
 	public String getScannedBy() {
 		return this.scannedBy;
 	}
-	
+
 	// well, this might have broke the thread safe rule
-	
-	public void setHasRoverTrue(){
+
+	public void setHasRoverTrue() {
 		this.hasRover = true;
 	}
-	
-	public void setHasRoverFalse(){
+
+	public void setHasRoverFalse() {
 		this.hasRover = false;
 	}
-	
-	public void setScience(Science sci){
+
+	public void setScience(Science sci) {
 		this.science = sci;
 	}
-	
+
 	public boolean setScannedBy(String roverName) {
-		if(this.scannedBy == null){
+		if (this.scannedBy == null) {
 			this.scannedBy = roverName;
 			return true;
 		} else {
