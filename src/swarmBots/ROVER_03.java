@@ -319,9 +319,9 @@ public class ROVER_03 extends Rover {
 		}
 		System.out.println("counts = North(" + northUnvisitedCount + ") East(" + eastUnvisitedCount + ") South("
 				+ southUnvisitedCount + ") West(" + westUnvisitedCount + ")");
-		System.out.println("countList = " + countList);
+		// System.out.println("countList = " + countList);
 		System.out.println("favoredDirStack = " + directionStack);
-		System.out.println("coordVisitCountMap = " + coordVisitCountMap);
+		// System.out.println("coordVisitCountMap = " + coordVisitCountMap);
 
 		return directionStack;
 	}

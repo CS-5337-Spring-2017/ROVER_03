@@ -99,7 +99,8 @@ public class DisplayCommunicationsMap {
 
 						// if still empty check for rovers and print them
 					} else if (tempTile.getHasRover()) {
-						System.out.print(tempTile.getRoverId());
+						System.out.print(
+								String.format(String.format("%02d", Integer.valueOf(tempTile.getRoverId().trim()))));
 					} else {
 						System.out.print("  ");
 					}
