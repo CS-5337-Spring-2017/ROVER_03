@@ -171,7 +171,8 @@ public class ROVER_03 extends Rover {
 				}
 
 				try {
-					communication.postScanMapTiles(currentLoc, scanMapTiles);
+					communication.sendTweet(getCurrentLocation().xpos, getCurrentLocation().ypos);
+					// communication.postScanMapTiles(currentLoc, scanMapTiles);
 				} catch (Exception e) {
 					System.err.println("Post current map to communication server failed. Cause: "
 							+ e.getClass().getName() + ": " + e.getMessage());
