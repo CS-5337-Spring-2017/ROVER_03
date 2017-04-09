@@ -1,6 +1,7 @@
 package common;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,6 +34,65 @@ public class Communication {
 		this.rovername = rovername;
 		this.corp_secret = corp_secret;
 
+	}
+
+	@SuppressWarnings("unchecked")
+	public void sendTweet(int x, int y) throws IOException {
+		JSONObject tweetMsg = new JSONObject();
+		tweetMsg.put('x', x);
+		tweetMsg.put('y', y);
+
+		sendTweetJSONDataToServer(tweetMsg);
+	}
+
+	public void sendTweetJSONDataToServer(JSONObject jsonObject) throws IOException, IOException {
+		HttpURLConnection con = (HttpURLConnection) new URL(url + "/rover/tweet").openConnection();
+
+		// add request header
+		con.setDoOutput(true);
+		con.setRequestMethod("POST");
+		con.setRequestProperty("Rover-Name", rovername);
+		con.setRequestProperty("Content-Type", "application/json");
+
+		byte[] jsonBytes = jsonObject.toString().getBytes("UTF-8");
+
+		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+		wr.write(jsonBytes);
+		wr.flush();
+		wr.close();
+
+		int responseCode = con.getResponseCode();
+		System.out.println("\nSending 'POST' request to URL : " + url);
+		System.out.println("Response Code : " + responseCode);
+
+		con.disconnect();
+	}
+
+	public String readTweetJSONDataFromServer(String roverName) throws IOException, IOException, ParseException {
+		HttpURLConnection con = (HttpURLConnection) new URL(url + "/rover/tweet/" + roverName).openConnection();
+
+		// add request header
+		con.setDoOutput(false);
+		con.setRequestMethod("GET");
+		con.setRequestProperty("Rover-Name", rovername);
+		con.setRequestProperty("Content-Type", "application/json");
+		con.setRequestProperty("Accept", "application/json");
+
+		DataInputStream in = new DataInputStream(con.getInputStream());
+		StringBuffer jsonBuf = new StringBuffer();
+		byte[] buffer = new byte[1024];
+		int bytesRead;
+		while ((bytesRead = in.read(buffer)) != -1) {
+			jsonBuf.append(new String(buffer, 0, bytesRead));
+		}
+
+		int responseCode = con.getResponseCode();
+		System.out.println("\nSending 'GET' request to URL : " + url);
+		System.out.println("Response Code : " + responseCode);
+
+		con.disconnect();
+
+		return jsonBuf.toString();
 	}
 
 	public String postScanMapTiles(Coord currentLoc, MapTile[][] scanMapTiles) {
