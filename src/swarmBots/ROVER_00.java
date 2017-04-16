@@ -102,8 +102,12 @@ public class ROVER_00 extends Rover {
 			 */
 			while (true) { // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-				System.out.println("ROVER_03's Coordinates from comm server: "
-						+ communication.readTweetJSONDataFromServer("ROVER_03"));
+				try {
+					System.out.println("ROVER_03's Coordinates from comm server: "
+							+ communication.readTweetJSONDataFromServer("ROVER_03"));
+				} catch (Exception e) {
+					System.out.println("Comm server failure: " + e.getClass().getName() + ":" + e.getMessage());
+				}
 				//
 				// // **** Request Rover Location from RCP ****
 				// currentLoc = getCurrentLocation();
