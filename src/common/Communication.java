@@ -9,11 +9,19 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import enums.RoverDriveType;
+import enums.RoverMode;
+import enums.RoverToolType;
+import enums.Science;
+import enums.Terrain;
 
 /**
  * Created by samskim on 5/12/16.
@@ -37,16 +45,35 @@ public class Communication {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void sendTweet(int x, int y) throws IOException {
-		JSONObject tweetMsg = new JSONObject();
-		tweetMsg.put('x', x);
-		tweetMsg.put('y', y);
+	public void sendRoverDetail(RoverDetail roverDetail) throws IOException {
+		if (roverDetail == null) {
+			throw new NullPointerException("roverDetail is null");
+		}
+		JSONObject roverDetailMsg = new JSONObject();
+		roverDetailMsg.put("roverName", roverDetail.getRoverName());
+		roverDetailMsg.put("x", roverDetail.getX());
+		roverDetailMsg.put("y", roverDetail.getY());
+		if (roverDetail.getDriveType() != null) {
+			roverDetailMsg.put("driveType", roverDetail.getDriveType().name());
+		}
+		if (roverDetail.getRoverMode() != null) {
+			roverDetailMsg.put("roverMode", roverDetail.getRoverMode().name());
+		}
+		if (roverDetail.getToolType1() != null) {
+			roverDetailMsg.put("toolType1", roverDetail.getToolType1().name());
+		}
+		if (roverDetail.getToolType2() != null) {
+			roverDetailMsg.put("toolType2", roverDetail.getToolType2().name());
+		}
+		roverDetailMsg.put("targetX", roverDetail.getTargetX());
+		roverDetailMsg.put("targetY", roverDetail.getTargetY());
 
-		sendTweetJSONDataToServer(tweetMsg);
+		sendRoverDetailJSONDataToServer(roverDetailMsg);
 	}
 
-	public void sendTweetJSONDataToServer(JSONObject jsonObject) throws IOException, IOException {
-		HttpURLConnection con = (HttpURLConnection) new URL(url + "/rover/tweet").openConnection();
+	private void sendRoverDetailJSONDataToServer(JSONObject jsonObject) throws IOException, IOException {
+		System.out.println("\nSending 'POST' request to URL : " + url + "/rover/detail");
+		HttpURLConnection con = (HttpURLConnection) new URL(url + "/rover/detail").openConnection();
 
 		// add request header
 		con.setDoOutput(true);
@@ -62,14 +89,54 @@ public class Communication {
 		wr.close();
 
 		int responseCode = con.getResponseCode();
-		System.out.println("\nSending 'POST' request to URL : " + url);
 		System.out.println("Response Code : " + responseCode);
 
 		con.disconnect();
 	}
 
-	public String readTweetJSONDataFromServer(String roverName) throws IOException, IOException, ParseException {
-		HttpURLConnection con = (HttpURLConnection) new URL(url + "/rover/tweet/" + roverName).openConnection();
+	public RoverDetail[] getAllRoverDetails() throws IOException {
+		JSONObject jsonObj = readRoverDetailJSONDataFromServer();
+
+		List<RoverDetail> roverDetails = new ArrayList<>();
+		for (Object roverName : jsonObj.keySet()) {
+			JSONObject roverDetailJson = (JSONObject) jsonObj.get(roverName);
+			RoverDetail roverDetail = new RoverDetail();
+			if (roverDetailJson.get("roverName") != null) {
+				roverDetail.setRoverName((String) roverDetailJson.get("roverName"));
+			}
+			if (roverDetailJson.get("x") != null) {
+				roverDetail.setX(((Long) roverDetailJson.get("x")).intValue());
+			}
+			if (roverDetailJson.get("y") != null) {
+				roverDetail.setY(((Long) roverDetailJson.get("y")).intValue());
+			}
+			if (roverDetailJson.get("driveType") != null) {
+				roverDetail.setDriveType(RoverDriveType.valueOf((String) roverDetailJson.get("driveType")));
+			}
+			if (roverDetailJson.get("roverMode") != null) {
+				roverDetail.setRoverMode(RoverMode.valueOf((String) roverDetailJson.get("roverMode")));
+			}
+			if (roverDetailJson.get("toolType1") != null) {
+				roverDetail.setToolType1(RoverToolType.valueOf((String) roverDetailJson.get("toolType1")));
+			}
+			if (roverDetailJson.get("toolType2") != null) {
+				roverDetail.setToolType2(RoverToolType.valueOf((String) roverDetailJson.get("toolType2")));
+			}
+			if (roverDetailJson.get("targetX") != null) {
+				roverDetail.setTargetX(((Long) roverDetailJson.get("targetX")).intValue());
+			}
+			if (roverDetailJson.get("y") != null) {
+				roverDetail.setTargetY(((Long) roverDetailJson.get("targetY")).intValue());
+			}
+			roverDetails.add(roverDetail);
+		}
+
+		return roverDetails.toArray(new RoverDetail[roverDetails.size()]);
+	}
+
+	private JSONObject readRoverDetailJSONDataFromServer() throws IOException, IOException {
+		System.out.println("Sending 'GET' request to URL : " + url + "/rover/detail/all");
+		HttpURLConnection con = (HttpURLConnection) new URL(url + "/rover/detail/all").openConnection();
 
 		// add request header
 		con.setDoOutput(false);
@@ -86,13 +153,78 @@ public class Communication {
 			jsonBuf.append(new String(buffer, 0, bytesRead));
 		}
 
+		JSONObject jsonObj = convertToJsonObject(jsonBuf.toString());
+
 		int responseCode = con.getResponseCode();
-		System.out.println("\nSending 'GET' request to URL : " + url);
 		System.out.println("Response Code : " + responseCode);
 
 		con.disconnect();
 
-		return jsonBuf.toString();
+		return jsonObj;
+	}
+
+	public ScienceDetail[] getAllScienceDetails() throws IOException {
+		JSONArray jsonArray = readScienceDetailJSONDataFromServer();
+
+		List<ScienceDetail> scienceDetails = new ArrayList<>();
+		for (int i = 0; i < jsonArray.size(); i++) {
+			JSONObject roverDetailJson = (JSONObject) jsonArray.get(i);
+			ScienceDetail scienceDetail = new ScienceDetail();
+			if (roverDetailJson.get("x") != null) {
+				scienceDetail.setX(((Long) roverDetailJson.get("x")).intValue());
+			}
+			if (roverDetailJson.get("y") != null) {
+				scienceDetail.setY(((Long) roverDetailJson.get("y")).intValue());
+			}
+			if (roverDetailJson.get("hasrover") != null) {
+				scienceDetail.setHasRover(((Boolean) roverDetailJson.get("hasrover")).booleanValue());
+			}
+			if (roverDetailJson.get("science") != null) {
+				scienceDetail.setScience(Science.valueOf((String) roverDetailJson.get("science")));
+			}
+			if (roverDetailJson.get("terrain") != null) {
+				scienceDetail.setTerrain(Terrain.valueOf((String) roverDetailJson.get("terrain")));
+			}
+			if (roverDetailJson.get("f") != null) {
+				scienceDetail.setFoundByRover(((Long) roverDetailJson.get("f")).intValue());
+			}
+			if (roverDetailJson.get("g") != null) {
+				scienceDetail.setGatheredByRover(((Long) roverDetailJson.get("g")).intValue());
+			}
+
+			scienceDetails.add(scienceDetail);
+		}
+
+		return scienceDetails.toArray(new ScienceDetail[scienceDetails.size()]);
+	}
+
+	private JSONArray readScienceDetailJSONDataFromServer() throws IOException, IOException {
+		System.out.println("Sending 'GET' request to URL : " + url + "/science/all");
+		HttpURLConnection con = (HttpURLConnection) new URL(url + "/science/all").openConnection();
+
+		// add request header
+		con.setDoOutput(false);
+		con.setRequestMethod("GET");
+		con.setRequestProperty("Rover-Name", rovername);
+		con.setRequestProperty("Content-Type", "application/json");
+		con.setRequestProperty("Accept", "application/json");
+
+		DataInputStream in = new DataInputStream(con.getInputStream());
+		StringBuffer jsonBuf = new StringBuffer();
+		byte[] buffer = new byte[1024];
+		int bytesRead;
+		while ((bytesRead = in.read(buffer)) != -1) {
+			jsonBuf.append(new String(buffer, 0, bytesRead));
+		}
+
+		JSONArray jsonArray = convertToJsonArray(jsonBuf.toString());
+
+		int responseCode = con.getResponseCode();
+		System.out.println("Response Code : " + responseCode);
+
+		con.disconnect();
+
+		return jsonArray;
 	}
 
 	public String postScanMapTiles(Coord currentLoc, MapTile[][] scanMapTiles) {
@@ -202,26 +334,26 @@ public class Communication {
 			e.printStackTrace();
 		}
 
-		return parseResponseStr(responseStr);
+		return convertToJsonArray(responseStr);
 	}
 
-	public JSONArray parseResponseStr(String response) {
-		JSONArray data = null;
+	public JSONArray convertToJsonArray(String response) {
 		try {
-			data = (JSONArray) parser.parse(response);
-
-			for (Object obj : data) {
-				JSONObject json = (JSONObject) obj;
-			}
-
+			return (JSONArray) parser.parse(response);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Parsing JSON data response to JSONArray failed! Data: " + response, e);
 		}
-
-		return data;
 	}
 
-	public String markTileForGather(Coord coord) {
+	public JSONObject convertToJsonObject(String response) {
+		try {
+			return (JSONObject) parser.parse(response);
+		} catch (ParseException e) {
+			throw new RuntimeException("Parsing JSON data response to JSONObject failed! Data: " + response, e);
+		}
+	}
+
+	public String markScienceForGather(Coord coord) {
 		int x = coord.xpos;
 		int y = coord.ypos;
 

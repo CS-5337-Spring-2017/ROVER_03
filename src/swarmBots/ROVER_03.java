@@ -12,11 +12,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
-import common.Communication;
 import common.Coord;
 import common.MapTile;
 import common.Rover;
+import common.RoverDetail;
+import common.ScienceDetail;
+import enums.RoverConfiguration;
+import enums.RoverDriveType;
+import enums.RoverMode;
+import enums.RoverToolType;
 import enums.Terrain;
+import rover_logic.Astar;
 
 /**
  * The seed that this program is built on is a chat program example found here:
@@ -41,6 +47,21 @@ public class ROVER_03 extends Rover {
 
 	static enum Direction {
 		NORTH, SOUTH, EAST, WEST;
+
+		static Map<Character, Direction> map = new HashMap<Character, Direction>() {
+			private static final long serialVersionUID = 1L;
+
+			{
+				put('N', NORTH);
+				put('S', SOUTH);
+				put('E', EAST);
+				put('W', WEST);
+			}
+		};
+
+		static Direction get(char c) {
+			return map.get(c);
+		}
 	}
 
 	static class MoveTargetLocation {
@@ -77,14 +98,11 @@ public class ROVER_03 extends Rover {
 
 			// Need to allow time for the connection to the server to be
 			// established
-			sleepTime = 900;
+			sleepTime = 300;
 
 			// Process all messages from server, wait until server requests
 			// Rover ID
 			// name - Return Rover Name to complete connection
-
-			// Initialize communication server connection to send map updates
-			Communication communication = new Communication("http://localhost:3000/api", rovername, "open_secret");
 
 			while (true) {
 				String line = receiveFrom_RCP.readLine();
@@ -111,6 +129,8 @@ public class ROVER_03 extends Rover {
 			// **** Request TARGET_LOC Location from SwarmServer ****
 			targetLocation = getTargetLocation();
 			System.out.println(rovername + " TARGET_LOC " + targetLocation);
+
+			Astar aStar = new Astar();
 
 			/**
 			 * #### Rover controller process loop ####
@@ -148,31 +168,83 @@ public class ROVER_03 extends Rover {
 				}
 
 				// ***** MOVING *****
-				MoveTargetLocation moveTargetLocation = chooseMoveTargetLocation(scanMapTiles, currentLocInMapTile,
-						currentLoc, mapTileCenter);
-				switch (moveTargetLocation.d) {
-				case NORTH:
-					moveNorth();
-					break;
-				case EAST:
-					moveEast();
-					break;
-				case SOUTH:
-					moveSouth();
-					break;
-				case WEST:
-					moveWest();
-					break;
+				MoveTargetLocation moveTargetLocation = null;
+				RoverDetail roverDetail = new RoverDetail();
+				ScienceDetail scienceDetail = analyzeAndGetSuitableScience();
+				if (scienceDetail != null) {
+
+					System.out.println("FOUND SCIENCE TO GATHER: " + scienceDetail);
+
+					// The rover is at the location of science, so gather
+					if (scienceDetail.getX() == getCurrentLocation().xpos
+							&& scienceDetail.getY() == getCurrentLocation().ypos) {
+						gatherScience(getCurrentLocation());
+						System.out.println("$$$$$> Gathered science " + scienceDetail.getScience() + " at location "
+								+ getCurrentLocation());
+					} else {
+
+						RoverConfiguration roverConfiguration = RoverConfiguration.valueOf(rovername);
+						RoverDriveType driveType = RoverDriveType.valueOf(roverConfiguration.getMembers().get(0));
+						RoverToolType tool1 = RoverToolType.getEnum(roverConfiguration.getMembers().get(1));
+						RoverToolType tool2 = RoverToolType.getEnum(roverConfiguration.getMembers().get(2));
+
+						aStar.addScanMap(doScan(), getCurrentLocation(), tool1, tool2);
+
+						char dirChar = aStar.findPath(getCurrentLocation(),
+								new Coord(scienceDetail.getX(), scienceDetail.getY()), driveType);
+
+						moveTargetLocation = new MoveTargetLocation();
+						moveTargetLocation.d = Direction.get(dirChar);
+
+						roverDetail.setRoverMode(RoverMode.GATHER);
+
+						System.out.println("=====> In gather mode using Astar in the direction " + dirChar);
+					}
+
+				} else {
+					moveTargetLocation = chooseMoveTargetLocation(scanMapTiles, currentLocInMapTile, currentLoc,
+							mapTileCenter);
+
+					System.out.println("*****> In explore mode in the direction " + moveTargetLocation.d);
+
+					roverDetail.setRoverMode(RoverMode.EXPLORE);
 				}
 
-				if (!previousLoc.equals(getCurrentLocation())) {
-					coordVisitCountMap.put(moveTargetLocation.targetCoord,
-							coordVisitCountMap.get(moveTargetLocation.targetCoord) + 1);
+				if (moveTargetLocation != null && moveTargetLocation.d != null) {
+					switch (moveTargetLocation.d) {
+					case NORTH:
+						moveNorth();
+						break;
+					case EAST:
+						moveEast();
+						break;
+					case SOUTH:
+						moveSouth();
+						break;
+					case WEST:
+						moveWest();
+						break;
+					}
+
+					if (!previousLoc.equals(getCurrentLocation())) {
+						coordVisitCountMap.put(moveTargetLocation.targetCoord,
+								coordVisitCountMap.get(moveTargetLocation.targetCoord) + 1);
+					}
 				}
 
 				try {
-					communication.sendTweet(getCurrentLocation().xpos, getCurrentLocation().ypos);
-					communication.postScanMapTiles(currentLoc, scanMapTiles);
+					roverDetail.setRoverName(rovername);
+					roverDetail.setX(getCurrentLocation().xpos);
+					roverDetail.setY(getCurrentLocation().ypos);
+
+					roverDetail.setDriveType(RoverDriveType.valueOf(RoverConfiguration.ROVER_03.getMembers().get(0)));
+					roverDetail.setToolType1(RoverToolType.valueOf(RoverConfiguration.ROVER_03.getMembers().get(1)));
+					roverDetail.setToolType2(RoverToolType.valueOf(RoverConfiguration.ROVER_03.getMembers().get(2)));
+
+					sendRoverDetail(roverDetail);
+
+					postScanMapTiles(currentLoc, scanMapTiles);
+
 				} catch (Exception e) {
 					System.err.println("Post current map to communication server failed. Cause: "
 							+ e.getClass().getName() + ": " + e.getMessage());

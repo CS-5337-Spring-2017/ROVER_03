@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Arrays;
 
-import common.Communication;
 import common.Rover;
 
 /**
@@ -95,16 +95,13 @@ public class ROVER_00 extends Rover {
 			targetLocation = getTargetLocation();
 			System.out.println(rovername + " TARGET_LOC " + targetLocation);
 
-			Communication communication = new Communication("http://localhost:3000/api", rovername, "open_secret");
-
 			/**
 			 * #### Rover controller process loop ####
 			 */
 			while (true) { // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 				try {
-					System.out.println("ROVER_03's Coordinates from comm server: "
-							+ communication.readTweetJSONDataFromServer("ROVER_03"));
+					System.out.println("All Rover details from comm server: " + Arrays.asList(getAllRoverDetails()));
 				} catch (Exception e) {
 					System.out.println("Comm server failure: " + e.getClass().getName() + ":" + e.getMessage());
 				}
