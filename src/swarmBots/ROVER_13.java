@@ -772,7 +772,7 @@ public class ROVER_13 {
 				// then add to the destination
 				if (!destinations.contains(coord) && !marked){
 					System.out.println("#####Added new destination for gathering: " + coord.toString());
-					comms.markTileForGather(coord);
+					comms.markScienceForGather(coord);
 					destinations.add(coord);
 				}
 			}
