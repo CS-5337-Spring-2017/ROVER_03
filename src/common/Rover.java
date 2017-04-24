@@ -322,7 +322,31 @@ public class Rover {
 								minDistanceScienceDetail = scienceDetail;
 							}
 						}
-					} // else if ... Implement for others
+					} else if (RoverDriveType.WALKER.name().equals(curRoverConfig.getMembers().get(0))) {
+						if (scienceDetail.getTerrain() != Terrain.FLUID) {
+							int distance = calculateDistance(getCurrentLocation().xpos, getCurrentLocation().ypos,
+									scienceDetail);
+							// TODO: Need another check on tools before
+							// distance
+							if (distance < minDistance) {
+								minDistance = distance;
+								minDistanceScienceDetail = scienceDetail;
+							}
+						}
+					} else if (RoverDriveType.WHEELS.name().equals(curRoverConfig.getMembers().get(0))) {
+						if (scienceDetail.getTerrain() != Terrain.SAND && scienceDetail.getTerrain() != Terrain.ROCK
+								&& scienceDetail.getTerrain() != Terrain.FLUID
+								&& scienceDetail.getTerrain() != Terrain.GRAVEL) {
+							int distance = calculateDistance(getCurrentLocation().xpos, getCurrentLocation().ypos,
+									scienceDetail);
+							// TODO: Need another check on tools before
+							// distance
+							if (distance < minDistance) {
+								minDistance = distance;
+								minDistanceScienceDetail = scienceDetail;
+							}
+						}
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -335,7 +359,7 @@ public class Rover {
 	private int calculateDistance(int x, int y, ScienceDetail scienceDetail) {
 		int xDis = Math.abs(x - scienceDetail.getX());
 		int yDis = Math.abs(y - scienceDetail.getY());
-		int distance = (int) Math.sqrt(Math.abs(xDis * xDis - xDis * yDis));
+		int distance = (int) Math.sqrt(Math.abs(xDis * xDis - yDis * yDis));
 		return distance;
 	}
 
