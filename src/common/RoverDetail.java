@@ -5,92 +5,121 @@ import enums.RoverMode;
 import enums.RoverToolType;
 
 public class RoverDetail {
-	private String roverName;
-	private int x;
-	private int y;
-	private RoverMode roverMode = RoverMode.EXPLORE;
-	private int targetX = -1;
-	private int targetY = -1;
-	private RoverDriveType driveType;
-	private RoverToolType toolType1;
-	private RoverToolType toolType2;
 
-	public String getRoverName() {
-		return roverName;
-	}
+    private String roverName;
 
-	public void setRoverName(String roverName) {
-		this.roverName = roverName;
-	}
+    private int x;
 
-	public int getX() {
-		return x;
-	}
+    private int y;
 
-	public void setX(int x) {
-		this.x = x;
-	}
+    private RoverMode roverMode = RoverMode.EXPLORE;
 
-	public int getY() {
-		return y;
-	}
+    private int targetX = -1;
 
-	public void setY(int y) {
-		this.y = y;
-	}
+    private int targetY = -1;
 
-	public RoverMode getRoverMode() {
-		return roverMode;
-	}
+    private RoverDriveType driveType;
 
-	public void setRoverMode(RoverMode roverMode) {
-		this.roverMode = roverMode;
-	}
+    private RoverToolType toolType1;
 
-	public int getTargetX() {
-		return targetX;
-	}
+    private RoverToolType toolType2;
 
-	public void setTargetX(int targetX) {
-		this.targetX = targetX;
-	}
+    public String getRoverName() {
 
-	public int getTargetY() {
-		return targetY;
-	}
+        return roverName;
+    }
 
-	public void setTargetY(int targetY) {
-		this.targetY = targetY;
-	}
+    public void setRoverName( String roverName ) {
 
-	public RoverDriveType getDriveType() {
-		return driveType;
-	}
+        this.roverName = roverName;
+    }
 
-	public void setDriveType(RoverDriveType driveType) {
-		this.driveType = driveType;
-	}
+    public int getX() {
 
-	public RoverToolType getToolType1() {
-		return toolType1;
-	}
+        return x;
+    }
 
-	public void setToolType1(RoverToolType toolType1) {
-		this.toolType1 = toolType1;
-	}
+    public void setX( int x ) {
 
-	public RoverToolType getToolType2() {
-		return toolType2;
-	}
+        this.x = x;
+    }
 
-	public void setToolType2(RoverToolType toolType2) {
-		this.toolType2 = toolType2;
-	}
+    public int getY() {
 
-	@Override
-	public String toString() {
-		return roverName + "[driveType=" + driveType + " ; x=" + x + " ; y=" + y + " ; targetX=" + targetX
-				+ " ; targetY=" + targetY + " ; toolType1=" + toolType1 + " ; toolType2=" + toolType2 + " ; roverMode="
-				+ roverMode + "]";
-	}
+        return y;
+    }
+
+    public void setY( int y ) {
+
+        this.y = y;
+    }
+
+    public RoverMode getRoverMode() {
+
+        return roverMode;
+    }
+
+    public void setRoverMode( RoverMode roverMode ) {
+
+        this.roverMode = roverMode;
+    }
+
+    public int getTargetX() {
+
+        return targetX;
+    }
+
+    public void setTargetX( int targetX ) {
+
+        this.targetX = targetX;
+    }
+
+    public int getTargetY() {
+
+        return targetY;
+    }
+
+    public void setTargetY( int targetY ) {
+
+        this.targetY = targetY;
+    }
+
+    public RoverDriveType getDriveType() {
+
+        return driveType;
+    }
+
+    public void setDriveType( RoverDriveType driveType ) {
+
+        this.driveType = driveType;
+    }
+
+    public RoverToolType getToolType1() {
+
+        return toolType1;
+    }
+
+    public void setToolType1( RoverToolType toolType1 ) {
+
+        this.toolType1 = toolType1;
+    }
+
+    public RoverToolType getToolType2() {
+
+        return toolType2;
+    }
+
+    public void setToolType2( RoverToolType toolType2 ) {
+
+        this.toolType2 = toolType2;
+    }
+
+    @Override
+    public String toString() {
+
+        return roverName + "[driveType=" + driveType + " ; x=" + x + " ; y=" + y
+            + " ; targetX=" + targetX + " ; targetY=" + targetY
+            + " ; toolType1=" + toolType1 + " ; toolType2=" + toolType2
+            + " ; roverMode=" + roverMode + "]";
+    }
 }
