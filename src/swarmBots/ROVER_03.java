@@ -77,7 +77,7 @@ public class ROVER_03 extends Rover {
 
 			// Need to allow time for the connection to the server to be
 			// established
-			sleepTime = 900;
+			sleepTime = 700;
 
 			// Process all messages from server, wait until server requests
 			// Rover ID
@@ -141,10 +141,10 @@ public class ROVER_03 extends Rover {
 				int maxY = currentLoc.ypos + mapTileCenter;
 				if (maxCoord.xpos < maxX && maxCoord.ypos < maxY) {
 					maxCoord = new Coord(maxX, maxY);
+				}else if (maxCoord.ypos < maxY) {
+					maxCoord = new Coord(maxCoord.xpos, maxY);
 				} else if (maxCoord.xpos < maxX) {
 					maxCoord = new Coord(maxX, maxCoord.ypos);
-				} else if (maxCoord.ypos < maxY) {
-					maxCoord = new Coord(maxCoord.xpos, maxY);
 				}
 
 				// ***** MOVING *****
@@ -168,6 +168,7 @@ public class ROVER_03 extends Rover {
 				if (!previousLoc.equals(getCurrentLocation())) {
 					coordVisitCountMap.put(moveTargetLocation.targetCoord,
 							coordVisitCountMap.get(moveTargetLocation.targetCoord) + 1);
+							//keeping track of previous visited places.
 				}
 
 				try {
