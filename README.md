@@ -1181,7 +1181,7 @@ explored.</p>
  visibility:visible;mso-wrap-style:square'>
  <v:imagedata src="ROLimage001.jpg" o:title="RoverSwarmProject_BlockDiagram"/>
 </v:shape><![endif]--><![if !vml]><img width=624 height=322
-src="image002.jpg"
+src="https://github.com/CS-5337-Spring-2017/ROVER_03/blob/master/blob/master/image002.jpg"
 alt="RoverSwarmProject_BlockDiagram.jpg" v:shapes="Picture_x0020_0"><![endif]></span></h3>
 
 <h2><span class=SpellE>RoverSwarmProject</span> – Java Project Structure</h2>
