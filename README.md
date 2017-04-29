@@ -75,7 +75,7 @@ Note: Make sure you have git installed.
 
 All done!
 
-####Running the project####
+#### Running the project ####
 
 1. Run Swarm communication sever by opening terminal at that specific location and type following command.
 
