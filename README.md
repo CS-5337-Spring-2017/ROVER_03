@@ -11,13 +11,18 @@ Use following link for reference.
 (https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 To run Rover Swarm Project locally, you need to take care of following things.
+
 * Pull code from GitHub repository.
 * Set it up that code in local machine.
 
-Now, setting up in local machine can be done using Eclipse or Command line or JAR files.
+Now, setting up project in local machine can be done using Eclipse or Command line or JAR files.
 Running this project depends upon the way you have files in your local computer i.e. JAR, Bat files, or inside Eclipse as a whole project.
 
-To set up project  locally using Eclipse follow steps mentioned bellow:
+###**Using eclipse**###
+
+To set up project locally using Eclipse follow steps mentioned bellow:
+
+####Grab rover code####
 
 1. In your local machine create a new folder where you want to store your project.
 2. Create blank Eclipse Java project at that folder.
@@ -41,3 +46,51 @@ To set up project  locally using Eclipse follow steps mentioned bellow:
 ![image for adding jars](http://i.imgur.com/kw9Ja0m.png)
 
 11. Navigate to your project folder and inside lib folder add all the jars and refresh your project. Boom, errors gone!
+
+####Grab communication server####
+
+Communication sever is not needed to check rover moment, but it's important when all the rovers start communicating with each other.
+
+Setting up communication sever is fairly similar to ROVER process.
+
+Prerequisite is to have NodeJs installed on your windows or mac pc.
+
+Follow link bellow for reference.
+
+(https://nodejs.org/en/download/)
+
+1. Now, go to your course repository on GitHub and go to Swarm Communication Server repo and copy link to clone as shown in Rover part.
+
+2. Create local folder with any name on your local pc.
+
+3. Open terminal at that location and type following code.
+Make sure you have git installed.
+
+```
+1. git init
+2. git remote set origin "paste url to swarm communication server"
+3. git pull origin master
+
+```
+
+All done!
+
+####Running the project####
+
+1. Run Swarm communication sever by opening terminal at that specific location and type following command.
+
+```
+node app.js
+
+```
+Make sure you have nodejs installed.
+
+2. Inside your eclipse project under src/controlServer run `RoverCommandProcessor.java`.
+This will run map and command processor and you'll be able to see all rovers at initial position.
+
+3. Now, to make your rover move, run `ROVER_XX.java` file under src/swarmBots folder from Eclipse.
+
+
+**Pending**
+1. Run using Jar and Bat files.
+2. Question 4.
