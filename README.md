@@ -24,7 +24,7 @@ To set up project  locally using Eclipse follow steps mentioned bellow:
 3. Create a folder ROVER_XX inside that folder. (Where XX represents your rover number)
 4. Go to your rover specific repository on GitHub and use big green button to copy link to clipboard.
 
-[image for clone link]!(http://imgur.com/DyvM8Y5)
+![image for clone link](http://imgur.com/DyvM8Y5)
 
 5. On your local machine folder where you're storing your project, create a folder ROVER_XX. (Again as previously XX represents your rover number)
 6. Open terminal at that location and type following commands.
@@ -38,6 +38,6 @@ To set up project  locally using Eclipse follow steps mentioned bellow:
 9. Now, once you open Eclipse and refresh your project you'll all the files there but with serval errors.
 10. To remove all errors, right click on your project navigate to Build path --> Configure build path under Java Build path tab click on Libraries and click on add external jars.
 
-[image for adding jars]!(http://imgur.com/kw9Ja0m)
+![image for adding jars](http://imgur.com/kw9Ja0m)
 
 11. Navigate to your project folder and inside lib folder add all the jars and refresh your project. Boom, errors gone!
