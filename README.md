@@ -15,14 +15,14 @@ To run Rover Swarm Project locally, you need to take care of following things.
 * Pull code from GitHub repository.
 * Set it up that code in local machine.
 
-Now, setting up project in local machine can be done using Eclipse or Command line or JAR files.
+Now, setting up project in local machine can be done using Eclipse.
 Running this project depends upon the way you have files in your local computer i.e. JAR, Bat files, or inside Eclipse as a whole project.
 
-###**Using eclipse**###
+### **Using eclipse** ###
 
 To set up project locally using Eclipse follow steps mentioned bellow:
 
-####Grab rover code####
+#### Grab rover code ####
 
 1. In your local machine create a new folder where you want to store your project.
 2. Create blank Eclipse Java project at that folder.
@@ -47,7 +47,7 @@ To set up project locally using Eclipse follow steps mentioned bellow:
 
 11. Navigate to your project folder and inside lib folder add all the jars and refresh your project. Boom, errors gone!
 
-####Grab communication server####
+#### Grab communication server ####
 
 Communication sever is not needed to check rover moment, but it's important when all the rovers start communicating with each other.
 
@@ -64,7 +64,7 @@ Follow link bellow for reference.
 2. Create local folder with any name on your local pc.
 
 3. Open terminal at that location and type following code.
-Make sure you have git installed.
+Note: Make sure you have git installed.
 
 ```
 1. git init
@@ -81,9 +81,8 @@ All done!
 
 ```
 node app.js
-
 ```
-Make sure you have nodejs installed.
+Note: Make sure you have NodeJs installed.
 
 2. Inside your eclipse project under src/controlServer run `RoverCommandProcessor.java`.
 This will run map and command processor and you'll be able to see all rovers at initial position.
