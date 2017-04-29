@@ -1,1602 +1,224 @@
-<html xmlns:v="urn:schemas-microsoft-com:vml"
-xmlns:o="urn:schemas-microsoft-com:office:office"
-xmlns:w="urn:schemas-microsoft-com:office:word"
-xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
-xmlns="http://www.w3.org/TR/REC-html40">
+# CS-5337-Spring 2017 Rover Swarm Project
 
-<head>
-<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
-<meta name=ProgId content=Word.Document>
-<meta name=Generator content="Microsoft Word 12">
-<meta name=Originator content="Microsoft Word 12">
-<link rel=File-List href="ROLfilelist.xml">
-<link rel=Edit-Time-Data href="ROLeditdata.mso">
-<!--[if !mso]>
-<style>
-v\:* {behavior:url(#default#VML);}
-o\:* {behavior:url(#default#VML);}
-w\:* {behavior:url(#default#VML);}
-.shape {behavior:url(#default#VML);}
-</style>
-<![endif]--><!--[if gte mso 9]><xml>
- <o:DocumentProperties>
-  <o:Author>maeswara</o:Author>
-  <o:LastAuthor>maeswara</o:LastAuthor>
-  <o:Revision>2</o:Revision>
-  <o:TotalTime>355</o:TotalTime>
-  <o:Created>2017-04-28T07:45:00Z</o:Created>
-  <o:LastSaved>2017-04-28T07:45:00Z</o:LastSaved>
-  <o:Pages>3</o:Pages>
-  <o:Words>694</o:Words>
-  <o:Characters>3960</o:Characters>
-  <o:Company>Oracle Corporation</o:Company>
-  <o:Lines>33</o:Lines>
-  <o:Paragraphs>9</o:Paragraphs>
-  <o:CharactersWithSpaces>4645</o:CharactersWithSpaces>
-  <o:Version>12.00</o:Version>
- </o:DocumentProperties>
-</xml><![endif]-->
-<link rel=themeData href="ROLthemedata.thmx">
-<link rel=colorSchemeMapping
-href="ROLcolorschememapping.xml">
-<!--[if gte mso 9]><xml>
- <w:WordDocument>
-  <w:SpellingState>Clean</w:SpellingState>
-  <w:GrammarState>Clean</w:GrammarState>
-  <w:TrackMoves>false</w:TrackMoves>
-  <w:TrackFormatting/>
-  <w:PunctuationKerning/>
-  <w:ValidateAgainstSchemas/>
-  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
-  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
-  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
-  <w:DoNotPromoteQF/>
-  <w:LidThemeOther>EN-US</w:LidThemeOther>
-  <w:LidThemeAsian>X-NONE</w:LidThemeAsian>
-  <w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript>
-  <w:Compatibility>
-   <w:BreakWrappedTables/>
-   <w:SnapToGridInCell/>
-   <w:WrapTextWithPunct/>
-   <w:UseAsianBreakRules/>
-   <w:DontGrowAutofit/>
-   <w:SplitPgBreakAndParaMark/>
-   <w:DontVertAlignCellWithSp/>
-   <w:DontBreakConstrainedForcedTables/>
-   <w:DontVertAlignInTxbx/>
-   <w:Word11KerningPairs/>
-   <w:CachedColBalance/>
-  </w:Compatibility>
-  <m:mathPr>
-   <m:mathFont m:val="Cambria Math"/>
-   <m:brkBin m:val="before"/>
-   <m:brkBinSub m:val="&#45;-"/>
-   <m:smallFrac m:val="off"/>
-   <m:dispDef/>
-   <m:lMargin m:val="0"/>
-   <m:rMargin m:val="0"/>
-   <m:defJc m:val="centerGroup"/>
-   <m:wrapIndent m:val="1440"/>
-   <m:intLim m:val="subSup"/>
-   <m:naryLim m:val="undOvr"/>
-  </m:mathPr></w:WordDocument>
-</xml><![endif]--><!--[if gte mso 9]><xml>
- <w:LatentStyles DefLockedState="false" DefUnhideWhenUsed="true"
-  DefSemiHidden="true" DefQFormat="false" DefPriority="99"
-  LatentStyleCount="267">
-  <w:LsdException Locked="false" Priority="0" SemiHidden="false"
-   UnhideWhenUsed="false" QFormat="true" Name="Normal"/>
-  <w:LsdException Locked="false" Priority="9" SemiHidden="false"
-   UnhideWhenUsed="false" QFormat="true" Name="heading 1"/>
-  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 2"/>
-  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 3"/>
-  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 4"/>
-  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 5"/>
-  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 6"/>
-  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 7"/>
-  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 8"/>
-  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 9"/>
-  <w:LsdException Locked="false" Priority="39" Name="toc 1"/>
-  <w:LsdException Locked="false" Priority="39" Name="toc 2"/>
-  <w:LsdException Locked="false" Priority="39" Name="toc 3"/>
-  <w:LsdException Locked="false" Priority="39" Name="toc 4"/>
-  <w:LsdException Locked="false" Priority="39" Name="toc 5"/>
-  <w:LsdException Locked="false" Priority="39" Name="toc 6"/>
-  <w:LsdException Locked="false" Priority="39" Name="toc 7"/>
-  <w:LsdException Locked="false" Priority="39" Name="toc 8"/>
-  <w:LsdException Locked="false" Priority="39" Name="toc 9"/>
-  <w:LsdException Locked="false" Priority="35" QFormat="true" Name="caption"/>
-  <w:LsdException Locked="false" Priority="10" SemiHidden="false"
-   UnhideWhenUsed="false" QFormat="true" Name="Title"/>
-  <w:LsdException Locked="false" Priority="1" Name="Default Paragraph Font"/>
-  <w:LsdException Locked="false" Priority="11" SemiHidden="false"
-   UnhideWhenUsed="false" QFormat="true" Name="Subtitle"/>
-  <w:LsdException Locked="false" Priority="22" SemiHidden="false"
-   UnhideWhenUsed="false" QFormat="true" Name="Strong"/>
-  <w:LsdException Locked="false" Priority="20" SemiHidden="false"
-   UnhideWhenUsed="false" QFormat="true" Name="Emphasis"/>
-  <w:LsdException Locked="false" Priority="59" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Table Grid"/>
-  <w:LsdException Locked="false" UnhideWhenUsed="false" Name="Placeholder Text"/>
-  <w:LsdException Locked="false" Priority="1" SemiHidden="false"
-   UnhideWhenUsed="false" QFormat="true" Name="No Spacing"/>
-  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light Shading"/>
-  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light List"/>
-  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light Grid"/>
-  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Shading 1"/>
-  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Shading 2"/>
-  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium List 1"/>
-  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium List 2"/>
-  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 1"/>
-  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 2"/>
-  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 3"/>
-  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Dark List"/>
-  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful Shading"/>
-  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful List"/>
-  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful Grid"/>
-  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light Shading Accent 1"/>
-  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light List Accent 1"/>
-  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light Grid Accent 1"/>
-  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 1"/>
-  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 1"/>
-  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium List 1 Accent 1"/>
-  <w:LsdException Locked="false" UnhideWhenUsed="false" Name="Revision"/>
-  <w:LsdException Locked="false" Priority="34" SemiHidden="false"
-   UnhideWhenUsed="false" QFormat="true" Name="List Paragraph"/>
-  <w:LsdException Locked="false" Priority="29" SemiHidden="false"
-   UnhideWhenUsed="false" QFormat="true" Name="Quote"/>
-  <w:LsdException Locked="false" Priority="30" SemiHidden="false"
-   UnhideWhenUsed="false" QFormat="true" Name="Intense Quote"/>
-  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium List 2 Accent 1"/>
-  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 1"/>
-  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 1"/>
-  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 1"/>
-  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Dark List Accent 1"/>
-  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful Shading Accent 1"/>
-  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful List Accent 1"/>
-  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful Grid Accent 1"/>
-  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light Shading Accent 2"/>
-  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light List Accent 2"/>
-  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light Grid Accent 2"/>
-  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 2"/>
-  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 2"/>
-  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium List 1 Accent 2"/>
-  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium List 2 Accent 2"/>
-  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 2"/>
-  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 2"/>
-  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 2"/>
-  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Dark List Accent 2"/>
-  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful Shading Accent 2"/>
-  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful List Accent 2"/>
-  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful Grid Accent 2"/>
-  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light Shading Accent 3"/>
-  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light List Accent 3"/>
-  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light Grid Accent 3"/>
-  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 3"/>
-  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 3"/>
-  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium List 1 Accent 3"/>
-  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium List 2 Accent 3"/>
-  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 3"/>
-  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 3"/>
-  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 3"/>
-  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Dark List Accent 3"/>
-  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful Shading Accent 3"/>
-  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful List Accent 3"/>
-  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful Grid Accent 3"/>
-  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light Shading Accent 4"/>
-  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light List Accent 4"/>
-  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light Grid Accent 4"/>
-  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 4"/>
-  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 4"/>
-  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium List 1 Accent 4"/>
-  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium List 2 Accent 4"/>
-  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 4"/>
-  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 4"/>
-  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 4"/>
-  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Dark List Accent 4"/>
-  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful Shading Accent 4"/>
-  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful List Accent 4"/>
-  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful Grid Accent 4"/>
-  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light Shading Accent 5"/>
-  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light List Accent 5"/>
-  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light Grid Accent 5"/>
-  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 5"/>
-  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 5"/>
-  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium List 1 Accent 5"/>
-  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium List 2 Accent 5"/>
-  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 5"/>
-  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 5"/>
-  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 5"/>
-  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Dark List Accent 5"/>
-  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful Shading Accent 5"/>
-  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful List Accent 5"/>
-  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful Grid Accent 5"/>
-  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light Shading Accent 6"/>
-  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light List Accent 6"/>
-  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Light Grid Accent 6"/>
-  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 6"/>
-  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 6"/>
-  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium List 1 Accent 6"/>
-  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium List 2 Accent 6"/>
-  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 6"/>
-  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 6"/>
-  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 6"/>
-  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Dark List Accent 6"/>
-  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful Shading Accent 6"/>
-  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful List Accent 6"/>
-  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
-   UnhideWhenUsed="false" Name="Colorful Grid Accent 6"/>
-  <w:LsdException Locked="false" Priority="19" SemiHidden="false"
-   UnhideWhenUsed="false" QFormat="true" Name="Subtle Emphasis"/>
-  <w:LsdException Locked="false" Priority="21" SemiHidden="false"
-   UnhideWhenUsed="false" QFormat="true" Name="Intense Emphasis"/>
-  <w:LsdException Locked="false" Priority="31" SemiHidden="false"
-   UnhideWhenUsed="false" QFormat="true" Name="Subtle Reference"/>
-  <w:LsdException Locked="false" Priority="32" SemiHidden="false"
-   UnhideWhenUsed="false" QFormat="true" Name="Intense Reference"/>
-  <w:LsdException Locked="false" Priority="33" SemiHidden="false"
-   UnhideWhenUsed="false" QFormat="true" Name="Book Title"/>
-  <w:LsdException Locked="false" Priority="37" Name="Bibliography"/>
-  <w:LsdException Locked="false" Priority="39" QFormat="true" Name="TOC Heading"/>
- </w:LatentStyles>
-</xml><![endif]-->
-<style>
-<!--
- /* Font Definitions */
- @font-face
-	{font-family:Wingdings;
-	panose-1:5 0 0 0 0 0 0 0 0 0;
-	mso-font-charset:2;
-	mso-generic-font-family:auto;
-	mso-font-pitch:variable;
-	mso-font-signature:0 268435456 0 0 -2147483648 0;}
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;
-	mso-font-charset:1;
-	mso-generic-font-family:roman;
-	mso-font-format:other;
-	mso-font-pitch:variable;
-	mso-font-signature:0 0 0 0 0 0;}
-@font-face
-	{font-family:Cambria;
-	panose-1:2 4 5 3 5 4 6 3 2 4;
-	mso-font-charset:0;
-	mso-generic-font-family:roman;
-	mso-font-pitch:variable;
-	mso-font-signature:-536870145 1073743103 0 0 415 0;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;
-	mso-font-charset:0;
-	mso-generic-font-family:swiss;
-	mso-font-pitch:variable;
-	mso-font-signature:-520092929 1073786111 9 0 415 0;}
-@font-face
-	{font-family:Tahoma;
-	panose-1:2 11 6 4 3 5 4 4 2 4;
-	mso-font-charset:0;
-	mso-generic-font-family:swiss;
-	mso-font-format:other;
-	mso-font-pitch:variable;
-	mso-font-signature:3 0 0 0 1 0;}
- /* Style Definitions */
- p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{mso-style-unhide:no;
-	mso-style-qformat:yes;
-	mso-style-parent:"";
-	margin-top:0in;
-	margin-right:0in;
-	margin-bottom:10.0pt;
-	margin-left:0in;
-	line-height:115%;
-	mso-pagination:widow-orphan;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";
-	mso-ascii-font-family:Calibri;
-	mso-ascii-theme-font:minor-latin;
-	mso-fareast-font-family:Calibri;
-	mso-fareast-theme-font:minor-latin;
-	mso-hansi-font-family:Calibri;
-	mso-hansi-theme-font:minor-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:minor-bidi;}
-h1
-	{mso-style-priority:9;
-	mso-style-unhide:no;
-	mso-style-qformat:yes;
-	mso-style-link:"Heading 1 Char";
-	mso-style-next:Normal;
-	margin-top:24.0pt;
-	margin-right:0in;
-	margin-bottom:0in;
-	margin-left:0in;
-	margin-bottom:.0001pt;
-	line-height:115%;
-	mso-pagination:widow-orphan lines-together;
-	page-break-after:avoid;
-	mso-outline-level:1;
-	font-size:14.0pt;
-	font-family:"Cambria","serif";
-	mso-ascii-font-family:Cambria;
-	mso-ascii-theme-font:major-latin;
-	mso-fareast-font-family:"Times New Roman";
-	mso-fareast-theme-font:major-fareast;
-	mso-hansi-font-family:Cambria;
-	mso-hansi-theme-font:major-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:major-bidi;
-	color:#365F91;
-	mso-themecolor:accent1;
-	mso-themeshade:191;
-	mso-font-kerning:0pt;}
-h2
-	{mso-style-priority:9;
-	mso-style-qformat:yes;
-	mso-style-link:"Heading 2 Char";
-	mso-style-next:Normal;
-	margin-top:10.0pt;
-	margin-right:0in;
-	margin-bottom:0in;
-	margin-left:0in;
-	margin-bottom:.0001pt;
-	line-height:115%;
-	mso-pagination:widow-orphan lines-together;
-	page-break-after:avoid;
-	mso-outline-level:2;
-	font-size:13.0pt;
-	font-family:"Cambria","serif";
-	mso-ascii-font-family:Cambria;
-	mso-ascii-theme-font:major-latin;
-	mso-fareast-font-family:"Times New Roman";
-	mso-fareast-theme-font:major-fareast;
-	mso-hansi-font-family:Cambria;
-	mso-hansi-theme-font:major-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:major-bidi;
-	color:#4F81BD;
-	mso-themecolor:accent1;}
-h3
-	{mso-style-priority:9;
-	mso-style-qformat:yes;
-	mso-style-link:"Heading 3 Char";
-	mso-style-next:Normal;
-	margin-top:10.0pt;
-	margin-right:0in;
-	margin-bottom:0in;
-	margin-left:0in;
-	margin-bottom:.0001pt;
-	line-height:115%;
-	mso-pagination:widow-orphan lines-together;
-	page-break-after:avoid;
-	mso-outline-level:3;
-	font-size:11.0pt;
-	font-family:"Cambria","serif";
-	mso-ascii-font-family:Cambria;
-	mso-ascii-theme-font:major-latin;
-	mso-fareast-font-family:"Times New Roman";
-	mso-fareast-theme-font:major-fareast;
-	mso-hansi-font-family:Cambria;
-	mso-hansi-theme-font:major-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:major-bidi;
-	color:#4F81BD;
-	mso-themecolor:accent1;}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:blue;
-	mso-themecolor:hyperlink;
-	text-decoration:underline;
-	text-underline:single;}
-a:visited, span.MsoHyperlinkFollowed
-	{mso-style-noshow:yes;
-	mso-style-priority:99;
-	color:purple;
-	mso-themecolor:followedhyperlink;
-	text-decoration:underline;
-	text-underline:single;}
-p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
-	{mso-style-noshow:yes;
-	mso-style-priority:99;
-	mso-style-link:"Balloon Text Char";
-	margin:0in;
-	margin-bottom:.0001pt;
-	mso-pagination:widow-orphan;
-	font-size:8.0pt;
-	font-family:"Tahoma","sans-serif";
-	mso-fareast-font-family:Calibri;
-	mso-fareast-theme-font:minor-latin;
-	mso-bidi-font-family:Tahoma;}
-p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
-	{mso-style-priority:34;
-	mso-style-unhide:no;
-	mso-style-qformat:yes;
-	margin-top:0in;
-	margin-right:0in;
-	margin-bottom:10.0pt;
-	margin-left:.5in;
-	mso-add-space:auto;
-	line-height:115%;
-	mso-pagination:widow-orphan;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";
-	mso-ascii-font-family:Calibri;
-	mso-ascii-theme-font:minor-latin;
-	mso-fareast-font-family:Calibri;
-	mso-fareast-theme-font:minor-latin;
-	mso-hansi-font-family:Calibri;
-	mso-hansi-theme-font:minor-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:minor-bidi;}
-p.MsoListParagraphCxSpFirst, li.MsoListParagraphCxSpFirst, div.MsoListParagraphCxSpFirst
-	{mso-style-priority:34;
-	mso-style-unhide:no;
-	mso-style-qformat:yes;
-	mso-style-type:export-only;
-	margin-top:0in;
-	margin-right:0in;
-	margin-bottom:0in;
-	margin-left:.5in;
-	margin-bottom:.0001pt;
-	mso-add-space:auto;
-	line-height:115%;
-	mso-pagination:widow-orphan;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";
-	mso-ascii-font-family:Calibri;
-	mso-ascii-theme-font:minor-latin;
-	mso-fareast-font-family:Calibri;
-	mso-fareast-theme-font:minor-latin;
-	mso-hansi-font-family:Calibri;
-	mso-hansi-theme-font:minor-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:minor-bidi;}
-p.MsoListParagraphCxSpMiddle, li.MsoListParagraphCxSpMiddle, div.MsoListParagraphCxSpMiddle
-	{mso-style-priority:34;
-	mso-style-unhide:no;
-	mso-style-qformat:yes;
-	mso-style-type:export-only;
-	margin-top:0in;
-	margin-right:0in;
-	margin-bottom:0in;
-	margin-left:.5in;
-	margin-bottom:.0001pt;
-	mso-add-space:auto;
-	line-height:115%;
-	mso-pagination:widow-orphan;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";
-	mso-ascii-font-family:Calibri;
-	mso-ascii-theme-font:minor-latin;
-	mso-fareast-font-family:Calibri;
-	mso-fareast-theme-font:minor-latin;
-	mso-hansi-font-family:Calibri;
-	mso-hansi-theme-font:minor-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:minor-bidi;}
-p.MsoListParagraphCxSpLast, li.MsoListParagraphCxSpLast, div.MsoListParagraphCxSpLast
-	{mso-style-priority:34;
-	mso-style-unhide:no;
-	mso-style-qformat:yes;
-	mso-style-type:export-only;
-	margin-top:0in;
-	margin-right:0in;
-	margin-bottom:10.0pt;
-	margin-left:.5in;
-	mso-add-space:auto;
-	line-height:115%;
-	mso-pagination:widow-orphan;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";
-	mso-ascii-font-family:Calibri;
-	mso-ascii-theme-font:minor-latin;
-	mso-fareast-font-family:Calibri;
-	mso-fareast-theme-font:minor-latin;
-	mso-hansi-font-family:Calibri;
-	mso-hansi-theme-font:minor-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:minor-bidi;}
-span.Heading1Char
-	{mso-style-name:"Heading 1 Char";
-	mso-style-priority:9;
-	mso-style-unhide:no;
-	mso-style-locked:yes;
-	mso-style-link:"Heading 1";
-	mso-ansi-font-size:14.0pt;
-	mso-bidi-font-size:14.0pt;
-	font-family:"Cambria","serif";
-	mso-ascii-font-family:Cambria;
-	mso-ascii-theme-font:major-latin;
-	mso-fareast-font-family:"Times New Roman";
-	mso-fareast-theme-font:major-fareast;
-	mso-hansi-font-family:Cambria;
-	mso-hansi-theme-font:major-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:major-bidi;
-	color:#365F91;
-	mso-themecolor:accent1;
-	mso-themeshade:191;
-	font-weight:bold;}
-span.Heading2Char
-	{mso-style-name:"Heading 2 Char";
-	mso-style-priority:9;
-	mso-style-unhide:no;
-	mso-style-locked:yes;
-	mso-style-link:"Heading 2";
-	mso-ansi-font-size:13.0pt;
-	mso-bidi-font-size:13.0pt;
-	font-family:"Cambria","serif";
-	mso-ascii-font-family:Cambria;
-	mso-ascii-theme-font:major-latin;
-	mso-fareast-font-family:"Times New Roman";
-	mso-fareast-theme-font:major-fareast;
-	mso-hansi-font-family:Cambria;
-	mso-hansi-theme-font:major-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:major-bidi;
-	color:#4F81BD;
-	mso-themecolor:accent1;
-	font-weight:bold;}
-span.Heading3Char
-	{mso-style-name:"Heading 3 Char";
-	mso-style-priority:9;
-	mso-style-unhide:no;
-	mso-style-locked:yes;
-	mso-style-link:"Heading 3";
-	font-family:"Cambria","serif";
-	mso-ascii-font-family:Cambria;
-	mso-ascii-theme-font:major-latin;
-	mso-fareast-font-family:"Times New Roman";
-	mso-fareast-theme-font:major-fareast;
-	mso-hansi-font-family:Cambria;
-	mso-hansi-theme-font:major-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:major-bidi;
-	color:#4F81BD;
-	mso-themecolor:accent1;
-	font-weight:bold;}
-span.BalloonTextChar
-	{mso-style-name:"Balloon Text Char";
-	mso-style-noshow:yes;
-	mso-style-priority:99;
-	mso-style-unhide:no;
-	mso-style-locked:yes;
-	mso-style-link:"Balloon Text";
-	mso-ansi-font-size:8.0pt;
-	mso-bidi-font-size:8.0pt;
-	font-family:"Tahoma","sans-serif";
-	mso-ascii-font-family:Tahoma;
-	mso-hansi-font-family:Tahoma;
-	mso-bidi-font-family:Tahoma;}
-span.SpellE
-	{mso-style-name:"";
-	mso-spl-e:yes;}
-span.GramE
-	{mso-style-name:"";
-	mso-gram-e:yes;}
-.MsoChpDefault
-	{mso-style-type:export-only;
-	mso-default-props:yes;
-	mso-ascii-font-family:Calibri;
-	mso-ascii-theme-font:minor-latin;
-	mso-fareast-font-family:Calibri;
-	mso-fareast-theme-font:minor-latin;
-	mso-hansi-font-family:Calibri;
-	mso-hansi-theme-font:minor-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:minor-bidi;}
-.MsoPapDefault
-	{mso-style-type:export-only;
-	margin-bottom:10.0pt;
-	line-height:115%;}
-@page WordSection1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.0in 1.0in 1.0in;
-	mso-header-margin:.5in;
-	mso-footer-margin:.5in;
-	mso-paper-source:0;}
-div.WordSection1
-	{page:WordSection1;}
- /* List Definitions */
- @list l0
-	{mso-list-id:545918162;
-	mso-list-type:hybrid;
-	mso-list-template-ids:71874630 67698689 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
-@list l0:level1
-	{mso-level-number-format:bullet;
-	mso-level-text:\F0B7;
-	mso-level-tab-stop:none;
-	mso-level-number-position:left;
-	text-indent:-.25in;
-	font-family:Symbol;}
-@list l1
-	{mso-list-id:558564328;
-	mso-list-type:hybrid;
-	mso-list-template-ids:503730926 67698689 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
-@list l1:level1
-	{mso-level-number-format:bullet;
-	mso-level-text:\F0B7;
-	mso-level-tab-stop:none;
-	mso-level-number-position:left;
-	text-indent:-.25in;
-	font-family:Symbol;}
-@list l2
-	{mso-list-id:657417889;
-	mso-list-type:hybrid;
-	mso-list-template-ids:-457007930 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
-@list l2:level1
-	{mso-level-tab-stop:none;
-	mso-level-number-position:left;
-	text-indent:-.25in;}
-ol
-	{margin-bottom:0in;}
-ul
-	{margin-bottom:0in;}
--->
-</style>
-<!--[if gte mso 10]>
-<style>
- /* Style Definitions */
- table.MsoNormalTable
-	{mso-style-name:"Table Normal";
-	mso-tstyle-rowband-size:0;
-	mso-tstyle-colband-size:0;
-	mso-style-noshow:yes;
-	mso-style-priority:99;
-	mso-style-qformat:yes;
-	mso-style-parent:"";
-	mso-padding-alt:0in 5.4pt 0in 5.4pt;
-	mso-para-margin-top:0in;
-	mso-para-margin-right:0in;
-	mso-para-margin-bottom:10.0pt;
-	mso-para-margin-left:0in;
-	line-height:115%;
-	mso-pagination:widow-orphan;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";
-	mso-ascii-font-family:Calibri;
-	mso-ascii-theme-font:minor-latin;
-	mso-hansi-font-family:Calibri;
-	mso-hansi-theme-font:minor-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:minor-bidi;}
-table.MsoTableGrid
-	{mso-style-name:"Table Grid";
-	mso-tstyle-rowband-size:0;
-	mso-tstyle-colband-size:0;
-	mso-style-priority:59;
-	mso-style-unhide:no;
-	border:solid windowtext 1.0pt;
-	mso-border-alt:solid windowtext .5pt;
-	mso-padding-alt:0in 5.4pt 0in 5.4pt;
-	mso-border-insideh:.5pt solid windowtext;
-	mso-border-insidev:.5pt solid windowtext;
-	mso-para-margin:0in;
-	mso-para-margin-bottom:.0001pt;
-	mso-pagination:widow-orphan;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";
-	mso-ascii-font-family:Calibri;
-	mso-ascii-theme-font:minor-latin;
-	mso-hansi-font-family:Calibri;
-	mso-hansi-theme-font:minor-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:minor-bidi;}
-table.MsoTableLightGridAccent5
-	{mso-style-name:"Light Grid - Accent 5";
-	mso-tstyle-rowband-size:1;
-	mso-tstyle-colband-size:1;
-	mso-style-priority:62;
-	mso-style-unhide:no;
-	border:solid #4BACC6 1.0pt;
-	mso-border-themecolor:accent5;
-	mso-padding-alt:0in 5.4pt 0in 5.4pt;
-	mso-border-insideh:1.0pt solid #4BACC6;
-	mso-border-insideh-themecolor:accent5;
-	mso-border-insidev:1.0pt solid #4BACC6;
-	mso-border-insidev-themecolor:accent5;
-	mso-para-margin:0in;
-	mso-para-margin-bottom:.0001pt;
-	mso-pagination:widow-orphan;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";
-	mso-ascii-font-family:Calibri;
-	mso-ascii-theme-font:minor-latin;
-	mso-hansi-font-family:Calibri;
-	mso-hansi-theme-font:minor-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:minor-bidi;}
-table.MsoTableLightGridAccent5FirstRow
-	{mso-style-name:"Light Grid - Accent 5";
-	mso-table-condition:first-row;
-	mso-style-priority:62;
-	mso-style-unhide:no;
-	mso-tstyle-border-top:1.0pt solid #4BACC6;
-	mso-tstyle-border-top-themecolor:accent5;
-	mso-tstyle-border-left:1.0pt solid #4BACC6;
-	mso-tstyle-border-left-themecolor:accent5;
-	mso-tstyle-border-bottom:2.25pt solid #4BACC6;
-	mso-tstyle-border-bottom-themecolor:accent5;
-	mso-tstyle-border-right:1.0pt solid #4BACC6;
-	mso-tstyle-border-right-themecolor:accent5;
-	mso-tstyle-border-insideh:cell-none;
-	mso-tstyle-border-insidev:1.0pt solid #4BACC6;
-	mso-tstyle-border-insidev-themecolor:accent5;
-	mso-para-margin-top:0in;
-	mso-para-margin-bottom:0in;
-	mso-para-margin-bottom:.0001pt;
-	line-height:normal;
-	font-family:"Tahoma","sans-serif";
-	mso-ascii-font-family:Cambria;
-	mso-ascii-theme-font:major-latin;
-	mso-fareast-font-family:"Times New Roman";
-	mso-fareast-theme-font:major-fareast;
-	mso-hansi-font-family:Cambria;
-	mso-hansi-theme-font:major-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:major-bidi;
-	mso-ansi-font-weight:bold;
-	mso-bidi-font-weight:bold;}
-table.MsoTableLightGridAccent5LastRow
-	{mso-style-name:"Light Grid - Accent 5";
-	mso-table-condition:last-row;
-	mso-style-priority:62;
-	mso-style-unhide:no;
-	mso-tstyle-border-top:2.25pt double #4BACC6;
-	mso-tstyle-border-top-themecolor:accent5;
-	mso-tstyle-border-left:1.0pt solid #4BACC6;
-	mso-tstyle-border-left-themecolor:accent5;
-	mso-tstyle-border-bottom:1.0pt solid #4BACC6;
-	mso-tstyle-border-bottom-themecolor:accent5;
-	mso-tstyle-border-right:1.0pt solid #4BACC6;
-	mso-tstyle-border-right-themecolor:accent5;
-	mso-tstyle-border-insideh:cell-none;
-	mso-tstyle-border-insidev:1.0pt solid #4BACC6;
-	mso-tstyle-border-insidev-themecolor:accent5;
-	mso-para-margin-top:0in;
-	mso-para-margin-bottom:0in;
-	mso-para-margin-bottom:.0001pt;
-	line-height:normal;
-	font-family:"Tahoma","sans-serif";
-	mso-ascii-font-family:Cambria;
-	mso-ascii-theme-font:major-latin;
-	mso-fareast-font-family:"Times New Roman";
-	mso-fareast-theme-font:major-fareast;
-	mso-hansi-font-family:Cambria;
-	mso-hansi-theme-font:major-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:major-bidi;
-	mso-ansi-font-weight:bold;
-	mso-bidi-font-weight:bold;}
-table.MsoTableLightGridAccent5FirstCol
-	{mso-style-name:"Light Grid - Accent 5";
-	mso-table-condition:first-column;
-	mso-style-priority:62;
-	mso-style-unhide:no;
-	font-family:"Tahoma","sans-serif";
-	mso-ascii-font-family:Cambria;
-	mso-ascii-theme-font:major-latin;
-	mso-fareast-font-family:"Times New Roman";
-	mso-fareast-theme-font:major-fareast;
-	mso-hansi-font-family:Cambria;
-	mso-hansi-theme-font:major-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:major-bidi;
-	mso-ansi-font-weight:bold;
-	mso-bidi-font-weight:bold;}
-table.MsoTableLightGridAccent5LastCol
-	{mso-style-name:"Light Grid - Accent 5";
-	mso-table-condition:last-column;
-	mso-style-priority:62;
-	mso-style-unhide:no;
-	mso-tstyle-border-top:1.0pt solid #4BACC6;
-	mso-tstyle-border-top-themecolor:accent5;
-	mso-tstyle-border-left:1.0pt solid #4BACC6;
-	mso-tstyle-border-left-themecolor:accent5;
-	mso-tstyle-border-bottom:1.0pt solid #4BACC6;
-	mso-tstyle-border-bottom-themecolor:accent5;
-	mso-tstyle-border-right:1.0pt solid #4BACC6;
-	mso-tstyle-border-right-themecolor:accent5;
-	font-family:"Tahoma","sans-serif";
-	mso-ascii-font-family:Cambria;
-	mso-ascii-theme-font:major-latin;
-	mso-fareast-font-family:"Times New Roman";
-	mso-fareast-theme-font:major-fareast;
-	mso-hansi-font-family:Cambria;
-	mso-hansi-theme-font:major-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:major-bidi;
-	mso-ansi-font-weight:bold;
-	mso-bidi-font-weight:bold;}
-table.MsoTableLightGridAccent5OddColumn
-	{mso-style-name:"Light Grid - Accent 5";
-	mso-table-condition:odd-column;
-	mso-style-priority:62;
-	mso-style-unhide:no;
-	mso-tstyle-shading:#D2EAF1;
-	mso-tstyle-shading-themecolor:accent5;
-	mso-tstyle-shading-themetint:63;
-	mso-tstyle-border-top:1.0pt solid #4BACC6;
-	mso-tstyle-border-top-themecolor:accent5;
-	mso-tstyle-border-left:1.0pt solid #4BACC6;
-	mso-tstyle-border-left-themecolor:accent5;
-	mso-tstyle-border-bottom:1.0pt solid #4BACC6;
-	mso-tstyle-border-bottom-themecolor:accent5;
-	mso-tstyle-border-right:1.0pt solid #4BACC6;
-	mso-tstyle-border-right-themecolor:accent5;}
-table.MsoTableLightGridAccent5OddRow
-	{mso-style-name:"Light Grid - Accent 5";
-	mso-table-condition:odd-row;
-	mso-style-priority:62;
-	mso-style-unhide:no;
-	mso-tstyle-shading:#D2EAF1;
-	mso-tstyle-shading-themecolor:accent5;
-	mso-tstyle-shading-themetint:63;
-	mso-tstyle-border-top:1.0pt solid #4BACC6;
-	mso-tstyle-border-top-themecolor:accent5;
-	mso-tstyle-border-left:1.0pt solid #4BACC6;
-	mso-tstyle-border-left-themecolor:accent5;
-	mso-tstyle-border-bottom:1.0pt solid #4BACC6;
-	mso-tstyle-border-bottom-themecolor:accent5;
-	mso-tstyle-border-right:1.0pt solid #4BACC6;
-	mso-tstyle-border-right-themecolor:accent5;
-	mso-tstyle-border-insidev:1.0pt solid #4BACC6;
-	mso-tstyle-border-insidev-themecolor:accent5;}
-table.MsoTableLightGridAccent5EvenRow
-	{mso-style-name:"Light Grid - Accent 5";
-	mso-table-condition:even-row;
-	mso-style-priority:62;
-	mso-style-unhide:no;
-	mso-tstyle-border-top:1.0pt solid #4BACC6;
-	mso-tstyle-border-top-themecolor:accent5;
-	mso-tstyle-border-left:1.0pt solid #4BACC6;
-	mso-tstyle-border-left-themecolor:accent5;
-	mso-tstyle-border-bottom:1.0pt solid #4BACC6;
-	mso-tstyle-border-bottom-themecolor:accent5;
-	mso-tstyle-border-right:1.0pt solid #4BACC6;
-	mso-tstyle-border-right-themecolor:accent5;
-	mso-tstyle-border-insidev:1.0pt solid #4BACC6;
-	mso-tstyle-border-insidev-themecolor:accent5;}
-table.MsoTableMediumShading1Accent5
-	{mso-style-name:"Medium Shading 1 - Accent 5";
-	mso-tstyle-rowband-size:1;
-	mso-tstyle-colband-size:1;
-	mso-style-priority:63;
-	mso-style-unhide:no;
-	border:solid #78C0D4 1.0pt;
-	mso-border-themecolor:accent5;
-	mso-border-themetint:191;
-	mso-padding-alt:0in 5.4pt 0in 5.4pt;
-	mso-border-insideh:1.0pt solid #78C0D4;
-	mso-border-insideh-themecolor:accent5;
-	mso-border-insideh-themetint:191;
-	mso-para-margin:0in;
-	mso-para-margin-bottom:.0001pt;
-	mso-pagination:widow-orphan;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";
-	mso-ascii-font-family:Calibri;
-	mso-ascii-theme-font:minor-latin;
-	mso-hansi-font-family:Calibri;
-	mso-hansi-theme-font:minor-latin;
-	mso-bidi-font-family:"Times New Roman";
-	mso-bidi-theme-font:minor-bidi;}
-table.MsoTableMediumShading1Accent5FirstRow
-	{mso-style-name:"Medium Shading 1 - Accent 5";
-	mso-table-condition:first-row;
-	mso-style-priority:63;
-	mso-style-unhide:no;
-	mso-tstyle-shading:#4BACC6;
-	mso-tstyle-shading-themecolor:accent5;
-	mso-tstyle-border-top:1.0pt solid #78C0D4;
-	mso-tstyle-border-top-themecolor:accent5;
-	mso-tstyle-border-top-themetint:191;
-	mso-tstyle-border-left:1.0pt solid #78C0D4;
-	mso-tstyle-border-left-themecolor:accent5;
-	mso-tstyle-border-left-themetint:191;
-	mso-tstyle-border-bottom:1.0pt solid #78C0D4;
-	mso-tstyle-border-bottom-themecolor:accent5;
-	mso-tstyle-border-bottom-themetint:191;
-	mso-tstyle-border-right:1.0pt solid #78C0D4;
-	mso-tstyle-border-right-themecolor:accent5;
-	mso-tstyle-border-right-themetint:191;
-	mso-tstyle-border-insideh:cell-none;
-	mso-tstyle-border-insidev:cell-none;
-	mso-para-margin-top:0in;
-	mso-para-margin-bottom:0in;
-	mso-para-margin-bottom:.0001pt;
-	line-height:normal;
-	color:white;
-	mso-themecolor:background1;
-	mso-ansi-font-weight:bold;
-	mso-bidi-font-weight:bold;}
-table.MsoTableMediumShading1Accent5LastRow
-	{mso-style-name:"Medium Shading 1 - Accent 5";
-	mso-table-condition:last-row;
-	mso-style-priority:63;
-	mso-style-unhide:no;
-	mso-tstyle-border-top:2.25pt double #78C0D4;
-	mso-tstyle-border-top-themecolor:accent5;
-	mso-tstyle-border-top-themetint:191;
-	mso-tstyle-border-left:1.0pt solid #78C0D4;
-	mso-tstyle-border-left-themecolor:accent5;
-	mso-tstyle-border-left-themetint:191;
-	mso-tstyle-border-bottom:1.0pt solid #78C0D4;
-	mso-tstyle-border-bottom-themecolor:accent5;
-	mso-tstyle-border-bottom-themetint:191;
-	mso-tstyle-border-right:1.0pt solid #78C0D4;
-	mso-tstyle-border-right-themecolor:accent5;
-	mso-tstyle-border-right-themetint:191;
-	mso-tstyle-border-insideh:cell-none;
-	mso-tstyle-border-insidev:cell-none;
-	mso-para-margin-top:0in;
-	mso-para-margin-bottom:0in;
-	mso-para-margin-bottom:.0001pt;
-	line-height:normal;
-	mso-ansi-font-weight:bold;
-	mso-bidi-font-weight:bold;}
-table.MsoTableMediumShading1Accent5FirstCol
-	{mso-style-name:"Medium Shading 1 - Accent 5";
-	mso-table-condition:first-column;
-	mso-style-priority:63;
-	mso-style-unhide:no;
-	mso-ansi-font-weight:bold;
-	mso-bidi-font-weight:bold;}
-table.MsoTableMediumShading1Accent5LastCol
-	{mso-style-name:"Medium Shading 1 - Accent 5";
-	mso-table-condition:last-column;
-	mso-style-priority:63;
-	mso-style-unhide:no;
-	mso-ansi-font-weight:bold;
-	mso-bidi-font-weight:bold;}
-table.MsoTableMediumShading1Accent5OddColumn
-	{mso-style-name:"Medium Shading 1 - Accent 5";
-	mso-table-condition:odd-column;
-	mso-style-priority:63;
-	mso-style-unhide:no;
-	mso-tstyle-shading:#D2EAF1;
-	mso-tstyle-shading-themecolor:accent5;
-	mso-tstyle-shading-themetint:63;}
-table.MsoTableMediumShading1Accent5OddRow
-	{mso-style-name:"Medium Shading 1 - Accent 5";
-	mso-table-condition:odd-row;
-	mso-style-priority:63;
-	mso-style-unhide:no;
-	mso-tstyle-shading:#D2EAF1;
-	mso-tstyle-shading-themecolor:accent5;
-	mso-tstyle-shading-themetint:63;
-	mso-tstyle-border-insideh:cell-none;
-	mso-tstyle-border-insidev:cell-none;}
-table.MsoTableMediumShading1Accent5EvenRow
-	{mso-style-name:"Medium Shading 1 - Accent 5";
-	mso-table-condition:even-row;
-	mso-style-priority:63;
-	mso-style-unhide:no;
-	mso-tstyle-border-insideh:cell-none;
-	mso-tstyle-border-insidev:cell-none;}
-</style>
-<![endif]--><!--[if gte mso 9]><xml>
- <o:shapedefaults v:ext="edit" spidmax="3074"/>
-</xml><![endif]--><!--[if gte mso 9]><xml>
- <o:shapelayout v:ext="edit">
-  <o:idmap v:ext="edit" data="1"/>
- </o:shapelayout></xml><![endif]-->
-</head>
+# Group-3 - Describe how the Rover Swarm Project simulation engine works
 
-<body lang=EN-US link=blue vlink=purple style='tab-interval:.5in'>
+**About the Simulation Project:**
 
-<div class=WordSection1>
+The rover simulation software contains 3 major components that work in co-ordination to provide the simulation where rovers explore any given terrain made of different types of material and collect and analyze material substances of interest, called science, located at different regions of the terrain.	Examples of terrain types are soil, rock, fluid, gravel, etc. Examples of sciences are minerals, radioactive materials etc.
 
-<h1 align=center style='text-align:center'>Rover Swarm Project</h1>
+**Components of Rover Simulation Project:**
 
-<h2>About the Simulation Project:</h2>
+Following are the 3 major components of the rover simulation software:
 
-<p class=MsoNormal><span style='mso-tab-count:1'>               </span>The
-rover simulation software contains 3 major components that work in
-co-ordination to provide the simulation where rovers explore any given terrain
-made of different types of material and collect and analyze material substances
-of interest, called science, located at different regions of the terrain.<span
-style='mso-tab-count:1'>  </span>Examples of terrain types are soil, rock,
-fluid, gravel, etc. Examples of sciences are minerals, radioactive materials
-etc.</p>
+1.	Rover Command Processor
+2.	Rovers
+3.	Communication Server
 
-<h2>Components of Rover Simulation Project:</h2>
+**Rover Command Processor**
 
-<p class=MsoNormal><span style='mso-tab-count:1'>               </span>Following
-are the 3 major components of the rover simulation software:</p>
+The rover command processor is the Java Swing user interface (UI) that reads the map information stored in a text file format and display the visual representation of the map terrain along with the rovers and science information. The rover command processor also receives the movement information from each of the rovers and updates the display to show the most current location of each of the rover. The rover command
 
-<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in;mso-list:l2 level1 lfo1'><![if !supportLists]><span
-style='mso-bidi-font-family:Calibri;mso-bidi-theme-font:minor-latin'><span
-style='mso-list:Ignore'>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span></span><![endif]>Rover Command Processor</p>
+**Rovers**
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in;mso-list:l2 level1 lfo1'><![if !supportLists]><span
-style='mso-bidi-font-family:Calibri;mso-bidi-theme-font:minor-latin'><span
-style='mso-list:Ignore'>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span></span><![endif]>Rovers</p>
+Rovers are Java programs that contain algorithms to explore the terrain looking for sciences. Each rover has different drive types like wheels, treads, legs (walker), etc. and they have different capabilities and equipped with different types of tools to analyze and report different types of sciences. Rovers may encounter sciences that they are capable of gathering analyzing or they may encounter sciences that they are not equipped to handle. If they encounter sciences they cannot gather and analyze, they report the sciences they discovered to the communications server which the other rovers that are equipped to handle that science can read and harvest. The rover java programs are packaged along with the rover command processor into the same Java project “RoverSwarmProject”.
 
-<p class=MsoListParagraphCxSpLast style='text-indent:-.25in;mso-list:l2 level1 lfo1'><![if !supportLists]><span
-style='mso-bidi-font-family:Calibri;mso-bidi-theme-font:minor-latin'><span
-style='mso-list:Ignore'>3.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span></span><![endif]>Communication Server</p>
+**Communication Server**
 
-<h3>Rover Command Processor</h3>
+The communication server is a RESTful server application implemented in node.js. The communication server mimics a satellite that receives messages sent by rovers on the ground and also broadcasts information to rovers. The information shared via communication server includes details about activities of all active rovers in the terrain being explored, the details about all sciences that were communicated to the communication server by the rovers and the overall terrain map information showing what regions of the overall map have been explored so far and what portion is yet to be explored.
 
-<p class=MsoNormal><span style='mso-tab-count:1'>               </span>The
-rover command processor is the Java Swing user interface (UI) that reads the
-map information stored in a text file format and display the visual
-representation of the map terrain along with the rovers and science
-information. The rover command processor also receives the movement information
-from each of the rovers and updates the display to show the most current
-location of each of the rover. The rover command processor and the rovers are
-packaged into the same Java project “<span class=SpellE>RoverSwarmProject</span>”.</p>
+![image 1](http://i.imgur.com/ka699td.png)
 
-<h3>Rovers</h3>
+**RoverSwarmProject – Java Project Structure**
 
-<p class=MsoNormal><span style='mso-tab-count:1'>               </span>Rovers
-are Java programs that contain algorithms to explore the terrain looking for
-sciences. Each rover has different drive types like wheels, treads, legs
-(walker), etc. and they have different capabilities and equipped with different
-types of tools to analyze and report different types of sciences. Rovers may
-encounter sciences that they are capable of gathering analyzing or they may
-encounter sciences that they are not equipped to handle. If they encounter
-sciences they cannot gather and analyze, they report the sciences they
-discovered to the communications server which the other rovers that are
-equipped to handle that science can read and harvest. The rover java programs
-are packaged along with the rover command processor into the same Java project
-“<span class=SpellE>RoverSwarmProject</span>”.</p>
+The following table lists all the java packages in the RoverSwarmProject project and descriptions of key classes in those packages
 
-<h3>Communication Server</h3>
+![image 2](http://i.imgur.com/L6HqmRo.png)
 
-<p class=MsoNormal><span style='mso-tab-count:1'>               </span>The
-communication server is a <span class=SpellE>RESTful</span> server application
-implemented in node.js. The communication server mimics a satellite that
-receives messages sent by rovers on the ground and also broadcasts information
-to rovers. The information shared via communication server includes details
-about activities of all active rovers in the terrain being explored, the
-details about all sciences that were communicated to the communication server
-by the rovers and the overall terrain map information showing what regions of
-the overall map have been explored so far and what portion is yet to be
-explored.</p>
+**SwarmCommunicationServer – node.js application structure**
 
-<h3><span style='mso-no-proof:yes'><!--[if gte vml 1]><v:shapetype id="_x0000_t75"
- coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
- filled="f" stroked="f">
- <v:stroke joinstyle="miter"/>
- <v:formulas>
-  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
-  <v:f eqn="sum @0 1 0"/>
-  <v:f eqn="sum 0 0 @1"/>
-  <v:f eqn="prod @2 1 2"/>
-  <v:f eqn="prod @3 21600 pixelWidth"/>
-  <v:f eqn="prod @3 21600 pixelHeight"/>
-  <v:f eqn="sum @0 0 1"/>
-  <v:f eqn="prod @6 1 2"/>
-  <v:f eqn="prod @7 21600 pixelWidth"/>
-  <v:f eqn="sum @8 21600 0"/>
-  <v:f eqn="prod @7 21600 pixelHeight"/>
-  <v:f eqn="sum @10 21600 0"/>
- </v:formulas>
- <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
- <o:lock v:ext="edit" aspectratio="t"/>
-</v:shapetype><v:shape id="Picture_x0020_0" o:spid="_x0000_i1025" type="#_x0000_t75"
- alt="RoverSwarmProject_BlockDiagram.jpg" style='width:468pt;height:241.8pt;
- visibility:visible;mso-wrap-style:square'>
- <v:imagedata src="ROLimage001.jpg" o:title="RoverSwarmProject_BlockDiagram"/>
-</v:shape><![endif]--><![if !vml]><img width=624 height=322
-src="https://github.com/CS-5337-Spring-2017/ROVER_03/blob/master/blob/master/image002.jpg"
-alt="RoverSwarmProject_BlockDiagram.jpg" v:shapes="Picture_x0020_0"><![endif]></span></h3>
+The following is the table that shows various key files in the SwarmCommunicationServer node.js application:
 
-<h2><span class=SpellE>RoverSwarmProject</span> – Java Project Structure</h2>
+![image 3](http://i.imgur.com/OiCQeVQ.png)
 
-<p class=MsoNormal><span style='mso-tab-count:1'>               </span>The
-following table lists all the java packages in the <span class=SpellE>RoverSwarmProject</span>
-project and descriptions of key classes in those packages.</p>
+**3) How can the project be setup to run locally using Eclipse, or command line, or runnable JAR’s?**
 
-<table class=MsoTableMediumShading1Accent5 border=1 cellspacing=0
- cellpadding=0 style='border-collapse:collapse;border:none;mso-border-alt:solid #78C0D4 1.0pt;
- mso-border-themecolor:accent5;mso-border-themetint:191;mso-yfti-tbllook:1184;
- mso-padding-alt:0in 5.4pt 0in 5.4pt'>
- <tr style='mso-yfti-irow:-1;mso-yfti-firstrow:yes'>
-  <td width=159 valign=top style='width:95.4pt;border:solid #78C0D4 1.0pt;
-  mso-border-themecolor:accent5;mso-border-themetint:191;border-right:none;
-  background:#4BACC6;mso-background-themecolor:accent5;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0in;margin-bottom:.0001pt;
-  text-align:center;line-height:normal;mso-yfti-cnfc:5'><b><span
-  style='color:white;mso-themecolor:background1'>Package Name<o:p></o:p></span></b></p>
-  </td>
-  <td width=623 valign=top style='width:373.5pt;border:solid #78C0D4 1.0pt;
-  mso-border-themecolor:accent5;mso-border-themetint:191;border-left:none;
-  background:#4BACC6;mso-background-themecolor:accent5;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0in;margin-bottom:.0001pt;
-  text-align:center;line-height:normal;mso-yfti-cnfc:1'><b><span
-  style='color:white;mso-themecolor:background1'>Details of functions<o:p></o:p></span></b></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:0'>
-  <td width=159 valign=top style='width:95.4pt;border-top:none;border-left:
-  solid #78C0D4 1.0pt;mso-border-left-themecolor:accent5;mso-border-left-themetint:
-  191;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:none;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;background:
-  #D2EAF1;mso-background-themecolor:accent5;mso-background-themetint:63;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:68'><b>common<o:p></o:p></b></p>
-  </td>
-  <td width=623 valign=top style='width:373.5pt;border-top:none;border-left:
-  none;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:solid #78C0D4 1.0pt;mso-border-right-themecolor:
-  accent5;mso-border-right-themetint:191;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;background:
-  #D2EAF1;mso-background-themecolor:accent5;mso-background-themetint:63;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoListParagraphCxSpFirst style='margin-bottom:0in;margin-bottom:
-  .0001pt;mso-add-space:auto;text-indent:-.25in;line-height:normal;mso-list:
-  l1 level1 lfo2;mso-yfti-cnfc:64'><![if !supportLists]><span style='font-family:
-  Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol'><span
-  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span></span></span><![endif]>Contains common classes like Rover base class,
-  constant files and value objects. </p>
-  <p class=MsoListParagraphCxSpLast style='margin-bottom:0in;margin-bottom:
-  .0001pt;mso-add-space:auto;text-indent:-.25in;line-height:normal;mso-list:
-  l1 level1 lfo2;mso-yfti-cnfc:64'><![if !supportLists]><span style='font-family:
-  Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol'><span
-  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span></span></span><![endif]>Communication.java handles all <span
-  class=SpellE>RESTful</span> communications with communication server.</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:1'>
-  <td width=159 valign=top style='width:95.4pt;border-top:none;border-left:
-  solid #78C0D4 1.0pt;mso-border-left-themecolor:accent5;mso-border-left-themetint:
-  191;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:none;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:132'><span class=SpellE><b>controlServer</b></span><b><o:p></o:p></b></p>
-  </td>
-  <td width=623 valign=top style='width:373.5pt;border-top:none;border-left:
-  none;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:solid #78C0D4 1.0pt;mso-border-right-themecolor:
-  accent5;mso-border-right-themetint:191;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoListParagraph style='margin-bottom:0in;margin-bottom:.0001pt;
-  mso-add-space:auto;text-indent:-.25in;line-height:normal;mso-list:l0 level1 lfo3;
-  mso-yfti-cnfc:128'><![if !supportLists]><span style='font-family:Symbol;
-  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol'><span
-  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span></span></span><![endif]>Contains the RoverCommandProcessor.java which
-  is the main entry point for the map UI display.</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:2'>
-  <td width=159 valign=top style='width:95.4pt;border-top:none;border-left:
-  solid #78C0D4 1.0pt;mso-border-left-themecolor:accent5;mso-border-left-themetint:
-  191;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:none;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;background:
-  #D2EAF1;mso-background-themecolor:accent5;mso-background-themetint:63;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:68'><span class=SpellE><b>enums</b></span><b><o:p></o:p></b></p>
-  </td>
-  <td width=623 valign=top style='width:373.5pt;border-top:none;border-left:
-  none;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:solid #78C0D4 1.0pt;mso-border-right-themecolor:
-  accent5;mso-border-right-themetint:191;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;background:
-  #D2EAF1;mso-background-themecolor:accent5;mso-background-themetint:63;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoListParagraphCxSpFirst style='margin-bottom:0in;margin-bottom:
-  .0001pt;mso-add-space:auto;text-indent:-.25in;line-height:normal;mso-list:
-  l0 level1 lfo3;mso-yfti-cnfc:64'><![if !supportLists]><span style='font-family:
-  Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol'><span
-  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span></span></span><![endif]>Contains Java <span class=SpellE>enum</span>
-  constants for rover drive type, rover tools, rover configuration, etc.</p>
-  <p class=MsoListParagraphCxSpLast style='margin-bottom:0in;margin-bottom:
-  .0001pt;mso-add-space:auto;text-indent:-.25in;line-height:normal;mso-list:
-  l0 level1 lfo3;mso-yfti-cnfc:64'><![if !supportLists]><span style='font-family:
-  Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol'><span
-  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span></span></span><![endif]>RoverConfiguration.java lists all rovers and
-  its specific configurations like drive type, tools etc.</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:3'>
-  <td width=159 valign=top style='width:95.4pt;border-top:none;border-left:
-  solid #78C0D4 1.0pt;mso-border-left-themecolor:accent5;mso-border-left-themetint:
-  191;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:none;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:132'><span class=SpellE><b>json</b></span><b><o:p></o:p></b></p>
-  </td>
-  <td width=623 valign=top style='width:373.5pt;border-top:none;border-left:
-  none;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:solid #78C0D4 1.0pt;mso-border-right-themecolor:
-  accent5;mso-border-right-themetint:191;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoListParagraph style='margin-bottom:0in;margin-bottom:.0001pt;
-  mso-add-space:auto;text-indent:-.25in;line-height:normal;mso-list:l0 level1 lfo3;
-  mso-yfti-cnfc:128'><![if !supportLists]><span style='font-family:Symbol;
-  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol'><span
-  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span></span></span><![endif]>Contains utility classes to handle <span
-  class=SpellE>json</span> data from the communication server.</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:4'>
-  <td width=159 valign=top style='width:95.4pt;border-top:none;border-left:
-  solid #78C0D4 1.0pt;mso-border-left-themecolor:accent5;mso-border-left-themetint:
-  191;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:none;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;background:
-  #D2EAF1;mso-background-themecolor:accent5;mso-background-themetint:63;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:68'><span class=SpellE><b>rover_logic</b></span><b><o:p></o:p></b></p>
-  </td>
-  <td width=623 valign=top style='width:373.5pt;border-top:none;border-left:
-  none;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:solid #78C0D4 1.0pt;mso-border-right-themecolor:
-  accent5;mso-border-right-themetint:191;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;background:
-  #D2EAF1;mso-background-themecolor:accent5;mso-background-themetint:63;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoListParagraph style='margin-bottom:0in;margin-bottom:.0001pt;
-  mso-add-space:auto;text-indent:-.25in;line-height:normal;mso-list:l0 level1 lfo3;
-  mso-yfti-cnfc:64'><![if !supportLists]><span style='font-family:Symbol;
-  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol'><span
-  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span></span></span><![endif]>Contains the different algorithms like <span
-  class=SpellE>AStar</span> for the rovers to use to explore and collect
-  science.</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:5'>
-  <td width=159 valign=top style='width:95.4pt;border-top:none;border-left:
-  solid #78C0D4 1.0pt;mso-border-left-themecolor:accent5;mso-border-left-themetint:
-  191;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:none;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:132'><span class=SpellE><b>supportTools</b></span><b><o:p></o:p></b></p>
-  </td>
-  <td width=623 valign=top style='width:373.5pt;border-top:none;border-left:
-  none;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:solid #78C0D4 1.0pt;mso-border-right-themecolor:
-  accent5;mso-border-right-themetint:191;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoListParagraph style='margin-bottom:0in;margin-bottom:.0001pt;
-  mso-add-space:auto;text-indent:-.25in;line-height:normal;mso-list:l0 level1 lfo3;
-  mso-yfti-cnfc:128'><![if !supportLists]><span style='font-family:Symbol;
-  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol'><span
-  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span></span></span><![endif]>DisplayCommunicationsMap.java is a utility to
-  display the full terrain map retrieved from the communications server.</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:6'>
-  <td width=159 valign=top style='width:95.4pt;border-top:none;border-left:
-  solid #78C0D4 1.0pt;mso-border-left-themecolor:accent5;mso-border-left-themetint:
-  191;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:none;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;background:
-  #D2EAF1;mso-background-themecolor:accent5;mso-background-themetint:63;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:68'><span class=SpellE><b>swarmBots</b></span><b><o:p></o:p></b></p>
-  </td>
-  <td width=623 valign=top style='width:373.5pt;border-top:none;border-left:
-  none;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:solid #78C0D4 1.0pt;mso-border-right-themecolor:
-  accent5;mso-border-right-themetint:191;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;background:
-  #D2EAF1;mso-background-themecolor:accent5;mso-background-themetint:63;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoListParagraph style='margin-bottom:0in;margin-bottom:.0001pt;
-  mso-add-space:auto;text-indent:-.25in;line-height:normal;mso-list:l0 level1 lfo3;
-  mso-yfti-cnfc:64'><![if !supportLists]><span style='font-family:Symbol;
-  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol'><span
-  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span></span></span><![endif]>Contains the individual rover java files.</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:7'>
-  <td width=159 valign=top style='width:95.4pt;border-top:none;border-left:
-  solid #78C0D4 1.0pt;mso-border-left-themecolor:accent5;mso-border-left-themetint:
-  191;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:none;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:132'><span class=SpellE><b>testUtilities</b></span><b><o:p></o:p></b></p>
-  </td>
-  <td width=623 valign=top style='width:373.5pt;border-top:none;border-left:
-  none;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:solid #78C0D4 1.0pt;mso-border-right-themecolor:
-  accent5;mso-border-right-themetint:191;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoListParagraph style='margin-bottom:0in;margin-bottom:.0001pt;
-  mso-add-space:auto;text-indent:-.25in;line-height:normal;mso-list:l0 level1 lfo3;
-  mso-yfti-cnfc:128'><![if !supportLists]><span style='font-family:Symbol;
-  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol'><span
-  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span></span></span><![endif]>Test cases for various Java code in the
-  project. </p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:8;mso-yfti-lastrow:yes'>
-  <td width=159 valign=top style='width:95.4pt;border-top:none;border-left:
-  solid #78C0D4 1.0pt;mso-border-left-themecolor:accent5;mso-border-left-themetint:
-  191;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:none;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;background:
-  #D2EAF1;mso-background-themecolor:accent5;mso-background-themetint:63;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:68'><span class=SpellE><b>UI_support</b></span><b><o:p></o:p></b></p>
-  </td>
-  <td width=623 valign=top style='width:373.5pt;border-top:none;border-left:
-  none;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:solid #78C0D4 1.0pt;mso-border-right-themecolor:
-  accent5;mso-border-right-themetint:191;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;background:
-  #D2EAF1;mso-background-themecolor:accent5;mso-background-themetint:63;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoListParagraph style='margin-bottom:0in;margin-bottom:.0001pt;
-  mso-add-space:auto;text-indent:-.25in;line-height:normal;mso-list:l0 level1 lfo3;
-  mso-yfti-cnfc:64'><![if !supportLists]><span style='font-family:Symbol;
-  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol'><span
-  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span></span></span><![endif]>Contains the Java files that contain the swing
-  components that make up the main rover command processor UI.</p>
-  </td>
- </tr>
-</table>
+First install git on your local machine in order to pull and push code from GitHub and local machine.
 
-<p class=MsoNormal><span style='mso-spacerun:yes'> </span></p>
+Use following link for reference.
 
-<h2><span class=SpellE>SwarmCommunicationServer</span> – node.js application
-structure</h2>
+(https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-<p class=MsoNormal><span style='mso-tab-count:1'>               </span>The
-following is the table that shows various key files in the <span class=SpellE>SwarmCommunicationServer</span>
-node.js application:</p>
+To run Rover Swarm Project locally, you need to take care of following things.
 
-<table class=MsoTableMediumShading1Accent5 border=1 cellspacing=0
- cellpadding=0 style='border-collapse:collapse;border:none;mso-border-alt:solid #78C0D4 1.0pt;
- mso-border-themecolor:accent5;mso-border-themetint:191;mso-yfti-tbllook:1184;
- mso-padding-alt:0in 5.4pt 0in 5.4pt'>
- <tr style='mso-yfti-irow:-1;mso-yfti-firstrow:yes'>
-  <td width=212 valign=top style='width:126.9pt;border:solid #78C0D4 1.0pt;
-  mso-border-themecolor:accent5;mso-border-themetint:191;border-right:none;
-  background:#4BACC6;mso-background-themecolor:accent5;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0in;margin-bottom:.0001pt;
-  text-align:center;line-height:normal;mso-yfti-cnfc:5'><b><span
-  style='color:white;mso-themecolor:background1'>File<o:p></o:p></span></b></p>
-  </td>
-  <td width=587 valign=top style='width:351.9pt;border:solid #78C0D4 1.0pt;
-  mso-border-themecolor:accent5;mso-border-themetint:191;border-left:none;
-  background:#4BACC6;mso-background-themecolor:accent5;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0in;margin-bottom:.0001pt;
-  text-align:center;line-height:normal;mso-yfti-cnfc:1'><b><span
-  style='color:white;mso-themecolor:background1'>Details of the function<o:p></o:p></span></b></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:0'>
-  <td width=212 valign=top style='width:126.9pt;border-top:none;border-left:
-  solid #78C0D4 1.0pt;mso-border-left-themecolor:accent5;mso-border-left-themetint:
-  191;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:none;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;background:
-  #D2EAF1;mso-background-themecolor:accent5;mso-background-themetint:63;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:68'><b>app.js<o:p></o:p></b></p>
-  </td>
-  <td width=587 valign=top style='width:351.9pt;border-top:none;border-left:
-  none;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:solid #78C0D4 1.0pt;mso-border-right-themecolor:
-  accent5;mso-border-right-themetint:191;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;background:
-  #D2EAF1;mso-background-themecolor:accent5;mso-background-themetint:63;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:64'>Main node.js module where all REST APIs are
-  implemented node express <span class=SpellE>npm</span> module.</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:1'>
-  <td width=212 valign=top style='width:126.9pt;border-top:none;border-left:
-  solid #78C0D4 1.0pt;mso-border-left-themecolor:accent5;mso-border-left-themetint:
-  191;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:none;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:132'><b>enums.js<o:p></o:p></b></p>
-  </td>
-  <td width=587 valign=top style='width:351.9pt;border-top:none;border-left:
-  none;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:solid #78C0D4 1.0pt;mso-border-right-themecolor:
-  accent5;mso-border-right-themetint:191;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:128'>Helper node module that list all types of drive
-  types, terrains, tools and science.</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:2'>
-  <td width=212 valign=top style='width:126.9pt;border-top:none;border-left:
-  solid #78C0D4 1.0pt;mso-border-left-themecolor:accent5;mso-border-left-themetint:
-  191;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:none;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;background:
-  #D2EAF1;mso-background-themecolor:accent5;mso-background-themetint:63;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:68'><b>express.js<o:p></o:p></b></p>
-  </td>
-  <td width=587 valign=top style='width:351.9pt;border-top:none;border-left:
-  none;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:solid #78C0D4 1.0pt;mso-border-right-themecolor:
-  accent5;mso-border-right-themetint:191;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;background:
-  #D2EAF1;mso-background-themecolor:accent5;mso-background-themetint:63;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:64'>Configures the express <span class=SpellE>npm</span>
-  module with <span class=SpellE>json</span> body parser. Configures the public
-  html directory that contains the index.html file displayed when accessing <a
-  href="http://localhost:3000">http://localhost:3000</a></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:3'>
-  <td width=212 valign=top style='width:126.9pt;border-top:none;border-left:
-  solid #78C0D4 1.0pt;mso-border-left-themecolor:accent5;mso-border-left-themetint:
-  191;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:none;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:132'><b>rover.js<o:p></o:p></b></p>
-  </td>
-  <td width=587 valign=top style='width:351.9pt;border-top:none;border-left:
-  none;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:solid #78C0D4 1.0pt;mso-border-right-themecolor:
-  accent5;mso-border-right-themetint:191;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:128'>Helper node <span class=GramE>module that list</span>
-  all rovers with it configured drive type, tools and sensor.</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:4;mso-yfti-lastrow:yes'>
-  <td width=212 valign=top style='width:126.9pt;border-top:none;border-left:
-  solid #78C0D4 1.0pt;mso-border-left-themecolor:accent5;mso-border-left-themetint:
-  191;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:none;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;background:
-  #D2EAF1;mso-background-themecolor:accent5;mso-background-themetint:63;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:68'><b>utils.js<o:p></o:p></b></p>
-  </td>
-  <td width=587 valign=top style='width:351.9pt;border-top:none;border-left:
-  none;border-bottom:solid #78C0D4 1.0pt;mso-border-bottom-themecolor:accent5;
-  mso-border-bottom-themetint:191;border-right:solid #78C0D4 1.0pt;mso-border-right-themecolor:
-  accent5;mso-border-right-themetint:191;mso-border-top-alt:solid #78C0D4 1.0pt;
-  mso-border-top-themecolor:accent5;mso-border-top-themetint:191;background:
-  #D2EAF1;mso-background-themecolor:accent5;mso-background-themetint:63;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal;mso-yfti-cnfc:64'>Utility methods for validations and updating
-  map/science data structures stored in the application.</p>
-  </td>
- </tr>
-</table>
+* Pull code from GitHub repository.
+* Set it up that code in local machine.
 
-<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+Now, setting up project in local machine can be done using Eclipse.
+Running this project depends upon the way you have files in your local computer i.e. JAR, Bat files, or inside Eclipse as a whole project.
 
-</div>
+### **Using eclipse** ###
 
-</body>
+To set up project locally using Eclipse follow steps mentioned bellow:
 
-</html>
+#### Grab rover code ####
+
+1. In your local machine create a new folder where you want to store your project.
+2. Create blank Eclipse Java project at that folder.
+3. Create a folder ROVER_XX inside that folder. (Where XX represents your rover number)
+4. Go to your rover specific repository on GitHub and use big green button to copy link to clipboard.
+
+![image for clone link](http://i.imgur.com/DyvM8Y5.png)
+
+5. On your local machine folder where you're storing your project, create a folder ROVER_XX. (Again as previously XX represents your rover number)
+6. Open terminal at that location and type following commands.
+```
+  1. git init
+  2. git remote set origin "paste your url here"
+  3. git pull origin master
+```
+7. Now rename this folder to anything else and create folder ROVER_XX.
+8. Copy everything from other folder to your src folder under ROVER_XX folder.
+9. Now, once you open Eclipse and refresh your project you'll all the files there but with serval errors.
+10. To remove all errors, right click on your project navigate to Build path --> Configure build path under Java Build path tab click on Libraries and click on add external jars.
+
+![image for adding jars](http://i.imgur.com/kw9Ja0m.png)
+
+11. Navigate to your project folder and inside lib folder add all the jars and refresh your project. Boom, errors gone!
+
+#### Grab communication server ####
+
+Communication sever is not needed to check rover moment, but it's important when all the rovers start communicating with each other.
+
+Setting up communication sever is fairly similar to ROVER process.
+
+Prerequisite is to have NodeJs installed on your windows or mac pc.
+
+Follow link bellow for reference.
+
+(https://nodejs.org/en/download/)
+
+1. Now, go to your course repository on GitHub and go to Swarm Communication Server repo and copy link to clone as shown in Rover part.
+
+2. Create local folder with any name on your local pc.
+
+3. Open terminal at that location and type following code.
+Note: Make sure you have git installed.
+
+```
+1. git init
+2. git remote set origin "paste url to swarm communication server"
+3. git pull origin master
+
+```
+
+All done!
+
+#### Running the project ####
+
+1. Run Swarm communication sever by opening terminal at that specific location and type following command.
+
+```
+node app.js
+```
+Note: Make sure you have NodeJs installed.
+
+2. Inside your eclipse project under src/controlServer run `RoverCommandProcessor.java`.
+This will run map and command processor and you'll be able to see all rovers at initial position.
+
+3. Now, to make your rover move, run `ROVER_XX.java` file under src/swarmBots folder from Eclipse.
+
+
+**Pending**
+1. Run using Jar and Bat files.
+2. Creating JAR and Bats files.
+
+### What is the sequence for starting the project?
+
+#### To start a project without without using the Swarm Communication Server using Eclipse
+
+* First, go to your Rover Project and open the source folder
+
+* Locate and open the Control Server package
+
+* Locate the Rover Command Processor dot java file
+
+* Right click on it and select run as Java application
+
+* A GUI Map will display on your screen, and the console will display a message > The Swarm server is running.  
+
+* Next, locate and open the Swarm Bots package
+
+* Select the Rover that you want to run
+
+* Right click on it and select run as Java application
+
+* Your Rover is now moving in the GUI Map
+
+#### To start a project using the Swarm Communication Server using Eclipse
+
+* First, make sure you have Node JS installed in your system
+
+* Open Git Bash or Command Prompt and navigate to the Swarm Communication Server project
+
+* To start the Swarm Communication Server enter `node app.js`
+
+* It will display a message > Express app running on port 3000
+
+* Note: to terminate the Swarm Communication Server hit control + c
+
+* Next, go to your Rover Project and open the source folder  
+
+* Locate and open the Control Server package
+
+* Locate the Rover Command Processor dot java file
+
+* Right click on it and select run as Java application
+
+* A GUI Map will display on your screen, and the console will display a message > The Swarm server is running.
+
+* Finally, locate and open the Swarm Bots package
+
+* Select the Rover that you want to run
+
+* Right click on it and select run as Java application
+
+* Your Rover is now moving in the GUI Map, communicating with the server and other Rovers, and collecting pieces of science
+
+### How are the maps structured and edited? How can the RoverCommandProcessor be started with a custom map?
+
+* The maps are structured as a text file where each square has an X and Y coordinates.  The (0, 0) coordinates are at the top left corner.  You can place the starting position for your particular Rover anywhere on the map by adding the Rover's number to the square on the map as long as there is no duplicate.  There are some key terrain and science features on the map such as R for rock, G for gravel, S for sand, X for abyss, Y for radioactive, C for crystal, M for mineral, and O for organic.
+
+* Because the map is a text file, you can pretty much edit anything as long as it is consistent with all the default values.
+
+* To start the Rover Command Processor with a custom map, all you have to do is add the map to your project folder and name it MapDefault.txt.
+
+### How can ROVER_xx be started with a custom URL?
+# Running on a Custom Server:
+###### First we need to install node and java in the server.  Then to run the Swarm Communication Server, install the dependencies in `package.json` and run the server file `app.js` with node.  And finally run the java swarm project by first opening the Rover Command Processor and with any Rover swarm bots.
+
+### Make some recommendations on how to improve the implementation of the project  
+# Possible implementations to improve simulation
+###### There can be a system that regulates time by days and keeps account of months and years.  If this is implemented, there can be all sorts of applications.  First thing is having weather implemented in such a way that when its winter season, the weather will be colder and it’ll create ice on the ground at nights and therefore it could deteriorate the time to explore.  Also random occurrences of clouds are blocking sunlight to the solar panels will slow the exploration and resource gathering process of the rover.  There could also be dust storms which could possibly block the solar panels from receiving any light.  When a rover breaks down, it would be a random occurrence because of weather condition.  There can also be a random break depending on how much time and kilometers it has traveled.
+
+##### Possible Implementations on Rover capabilities.
+
+
+1. checkRange() - This will check the range between two rovers and it’s eta of both rovers.
+
+2. foundResources() - This will give the location of found resources from all rovers and displays which rover has discovered which resources.
+
+3. setQueue() - This will set the queue for the rover to retrieve it’s next resource.
+
+4. getQueue() - This will show the next resource the rover will be attending.
+
+5. GetCurrentQueue() - This will show the current resource the rover is attending to.   
+
+6. getQueueOptions() - This will give options where it’s next available resource should attend to.
+
+7. getRoversQueue() - will display every Rover’s current resource and it’s next .   
+
+8. switchToLongMessages() - If need be, This will project more messages for the Rover.
+
+9. statusCheckConnectionAll() - This will forward all messages from and to each Rover and return the time it takes.
+
+10. statusCheckDiagnosisAll() - This will check all rovers and do a diagnosis.
