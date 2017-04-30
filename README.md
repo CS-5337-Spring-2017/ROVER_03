@@ -22,7 +22,7 @@ Running this project depends upon the way you have files in your local computer 
 
 To set up project locally using Eclipse follow steps mentioned bellow:
 
-#### Grab rover code ####
+### Grab rover code ###
 
 1. In your local machine create a new folder where you want to store your project.
 2. Create blank Eclipse Java project at that folder.
@@ -47,7 +47,7 @@ To set up project locally using Eclipse follow steps mentioned bellow:
 
 11. Navigate to your project folder and inside lib folder add all the jars and refresh your project. Boom, errors gone!
 
-#### Grab communication server ####
+### Grab communication server ###
 
 Communication sever is not needed to check rover moment, but it's important when all the rovers start communicating with each other.
 
@@ -75,7 +75,7 @@ Note: Make sure you have git installed.
 
 All done!
 
-#### Running the project ####
+### Running the project ###
 
 1. Run Swarm communication sever by opening terminal at that specific location and type following command.
 
@@ -92,9 +92,7 @@ This will run map and command processor and you'll be able to see all rovers at 
 
 ## **4) How are the windows bat files used, how are the runnable jars generated in Eclipse and used.**
 
-#### Creating Bat and JAR files ####
-
-**JAR**
+### **JAR**
 
 * JAR files are created to run program easily so we don't have to go trough all sequence of steps every time from eclipse.
 
@@ -131,19 +129,19 @@ java -jar <myjarfile.jar>
 
 **BAT files**
 
-* BAT files are essentially shortcut to run JAR files so you don't have to open terminal and type coomand all the time
+1. BAT files are essentially shortcut to run JAR files so you don't have to open terminal and type coomand all the time
 
-* First make sure your BAT file and JAR files are in same directory.
+2. First make sure your BAT file and JAR files are in same directory.
 
-* BAT files can be created using any text editor. Open text editor and type following command:
+3. BAT files can be created using any text editor. Open text editor and type following command:
 
 ```
 start java -jar JarFileName.jar
 ```
 
-* Save it as .bat file.
+4. Save it as .bat file.
 
-* Double click to run BAT file.
+5. Double click to run BAT file.
 
 **Note:** You can use one bat file to run multiple JARs. See the example bellow.
 
