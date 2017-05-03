@@ -103,12 +103,10 @@ Note: Follow the link below for reference.
 
 3. Open the terminal to that location and type in the following commands:
 Note: Make sure you have Git installed.
-
 ```
 1. git init
 2. git remote set origin "paste url to swarm communication server"
 3. git pull origin master
-
 ```
 
 #### Running the Project
@@ -156,7 +154,6 @@ Note: Just ignore all errors from Eclipse because these executable JAR files wil
 **Running JAR files**
 
 * Open the terminal at that location, and type in the following command:
-
 ```
 java -jar <myjarfile.jar>
 ```
@@ -168,11 +165,9 @@ java -jar <myjarfile.jar>
 2. First, make sure your BAT file and JAR files are in the same directory.
 
 3. BAT files can be created using any text editor. Open the text editor and type in the following command:
-
 ```
 start java -jar JarFileName.jar
 ```
-
 4. Save it as a .bat file.
 
 5. Double click to run the BAT file.
@@ -277,4 +272,3 @@ There can be a system that regulates time by days and keeps account of months an
 9. statusCheckConnectionAll() - This will forward all messages to and from each Rover and return the time it takes to communicate.
 
 10. statusCheckDiagnosisAll() - This will check all Rovers and do a diagnosis.
-
