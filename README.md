@@ -26,19 +26,19 @@ Rovers are Java programs that contain algorithms to explore the terrain looking 
 
 The communication server is a RESTful server application implemented in Node.JS. The communication server mimics a satellite that receives messages sent by rovers on the ground and also broadcasts information to rovers. The information shared via communication server includes details about activities of all active rovers in the terrain being explored, the details about all sciences that were communicated to the communication server by the rovers and the overall terrain map information showing what regions of the overall map have been explored so far and what portion is yet to be explored.
 
-![image 1](http://i.imgur.com/ka699td.png)
+![image 1](./docs/images/1.png)
 
 **RoverSwarmProject – Java Project Structure**
 
 The following table lists all Java packages in the RoverSwarmProject project and descriptions of key classes in those packages.
 
-![image 2](http://i.imgur.com/L6HqmRo.png)
+![image 2](./docs/images/2.png)
 
 **SwarmCommunicationServer – Node.JS application structure**
 
 The following is the table that shows various key files in the SwarmCommunicationServer Node.JS application:
 
-![image 3](http://i.imgur.com/OiCQeVQ.png)
+![image 3](./docs/images/3.png)
 
 ### How can the project be set up to run locally using Eclipse, command line, or runnable JAR’s?
 
@@ -67,7 +67,7 @@ To set up the project locally using Eclipse, follow the steps mentioned below:
 3. Create a folder ROVER_XX inside that folder, Where XX represents your rover number.
 4. Go to your rover-specific repository on GitHub and use the big green button to copy the link to the clipboard.
 
-![image for clone link](http://i.imgur.com/DyvM8Y5.png)
+![image for clone link](./docs/images/4.png)
 
 5. On your local machine folder where you're storing your project, create a folder ROVER_XX. (Again as previously, XX represents your rover number.)
 6. Open the terminal at that location and type following commands:
@@ -81,7 +81,7 @@ To set up the project locally using Eclipse, follow the steps mentioned below:
 9. Now, once you open Eclipse and refresh your project, you'll get all the files there, but with several errors.
 10. To remove all errors, right click on your project, navigate to Build Path --> Configure Build Path under the Java Build Path tab, click on Libraries, and click on add External JARs.
 
-![image for adding jars](http://i.imgur.com/kw9Ja0m.png)
+![image for adding jars](./docs/images/5.png)
 
 11. Navigate to your project folder, and inside the Lib folder, add all the JAR files and refresh your project. Errors are now gone.
 
@@ -141,11 +141,11 @@ Steps to create JAR files are as follows:
 
 2. Under the Java tab, select `Runnable Jar Files`.
 
-![Jar file 1](http://i.imgur.com/mIz4Qqg.png)
+![Jar file 1](./docs/images/6.png)
 
 3. Click `Next` and under Launch Configuration, select your Java file and export destination, and then select your location to save.
 
-![Jar file 2](http://i.imgur.com/6tDqKYF.png)
+![Jar file 2](./docs/images/7.png)
 
 4. Click `Next` and follow the remaining steps.
 
@@ -181,7 +181,7 @@ start java -jar ROVER_XX2.jar
 
 ### What is the sequence for starting the project?
 
-#### Using Eclipse to start a project without the use of the Swarm Communication Server: 
+#### Using Eclipse to start a project without the use of the Swarm Communication Server:
 
 	* First, go to your Rover Project and open the source folder.
 
@@ -201,7 +201,7 @@ start java -jar ROVER_XX2.jar
 
 	* Your Rover is now moving in the GUI Map.
 
-#### Using Eclipse to start a project with the use of the Swarm Communication Server: 
+#### Using Eclipse to start a project with the use of the Swarm Communication Server:
 
 	* First, make sure you have Node JS installed in your system.
 
