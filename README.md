@@ -1,10 +1,7 @@
-# Rover Swarm Project
+# CS-5337-Spring 2017 Rover Swarm Project
 
-## Part 1
+# Group-3 - Describe how the Rover Swarm Project simulation engine works
 
-<<<<<<< HEAD
-## **3) How can the project be setup to run locally using Eclipse, or command line, or runnable JAR’s?**
-=======
 **About the Simulation Project:**
 
 The rover simulation software contains three major components that work in coordination to provide the simulation where rovers explore any given terrain made of different types of material and collect and analyze material substances of interest called science located at different regions of the terrain. Examples of terrain types are soil, rock, fluid, gravel, etc. Examples of sciences are minerals, radioactive materials, etc.
@@ -44,7 +41,6 @@ The following is the table that shows various key files in the SwarmCommunicatio
 ![image 3](./docs/images/3.png)
 
 ### How can the project be set up to run locally using Eclipse, command line, or runnable JAR’s?
->>>>>>> master
 
 First install Git on your local machine in order to pull and push code from GitHub and the local machine.
 
@@ -64,11 +60,7 @@ Running this project depends on the way you have files in your local computer, i
 
 To set up the project locally using Eclipse, follow the steps mentioned below:
 
-<<<<<<< HEAD
-### Grab rover code ###
-=======
 #### Grab Rover Code
->>>>>>> master
 
 1. In your local machine, create a new folder where you want to store your project.
 2. Create a blank Eclipse Java project in that folder.
@@ -93,11 +85,7 @@ To set up the project locally using Eclipse, follow the steps mentioned below:
 
 11. Navigate to your project folder, and inside the Lib folder, add all the JAR files and refresh your project. Errors are now gone.
 
-<<<<<<< HEAD
-### Grab communication server ###
-=======
 #### Grab Communication Server
->>>>>>> master
 
 Communication server does not need to be started in order to run the Rovers, but it must be started first if you want all the Rovers to communicate with one another.
 
@@ -153,15 +141,7 @@ Steps to create JAR files are as follows:
 
 2. Under the Java tab, select `Runnable Jar Files`.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-### Running the project ###
-=======
-![Jar file 1](http://i.imgur.com/mIz4Qqg.png)
->>>>>>> master
-=======
 ![Jar file 1](./docs/images/6.png)
->>>>>>> master
 
 3. Click `Next` and under Launch Configuration, select your Java file and export destination, and then select your location to save.
 
@@ -177,10 +157,6 @@ Note: Just ignore all errors from Eclipse because these executable JAR files wil
 ```
 java -jar <myjarfile.jar>
 ```
-<<<<<<< HEAD
-**Note:** Make sure you have NodeJs installed.
-=======
->>>>>>> master
 
 **BAT files**
 
@@ -194,67 +170,6 @@ start java -jar JarFileName.jar
 ```
 4. Save it as a .bat file.
 
-<<<<<<< HEAD
-## **4) How are the windows bat files used, how are the runnable jars generated in Eclipse and used.**
-
-### **JAR**
-
-* JAR files are created to run program easily so we don't have to go trough all sequence of steps every time from eclipse.
-
-* There are main two files of which JAR files need to be created.
-
-1) ROVER_XX.java
-
-2) RoverCommandProcessor.java
-
-Steps to create JAR files are as following:
-
-1. Right click on your java file and click on `Export`.
-
-2. Under java tab select Runnable Jar Files.
-
-![Jar file 1](http://i.imgur.com/mIz4Qqg.png)
-
-3. Click next and under launch configuration select your java file and export destination select your location to save.
-
-![Jar file 2](http://i.imgur.com/6tDqKYF.png)
-
-4. Click next and follow along steps.
-
-5. Ignore all errors still jar files will run.
-
-
-**Running JAR files**
-
-* Open terminal at that location. And type following command.
-
-```
-java -jar <myjarfile.jar>
-```
-
-**BAT files**
-
-1. BAT files are essentially shortcut to run JAR files so you don't have to open terminal and type coomand all the time
-
-2. First make sure your BAT file and JAR files are in same directory.
-
-3. BAT files can be created using any text editor. Open text editor and type following command:
-
-```
-start java -jar JarFileName.jar
-```
-
-4. Save it as .bat file.
-
-5. Double click to run BAT file.
-
-**Note:** You can use one bat file to run multiple JARs. See the example bellow.
-
-```
-start java -jar ROVER_XX.jar
-start java -jar ROVER_XX2.jar
-```
-=======
 5. Double click to run the BAT file.
 
 **Note:** You can use one BAT file to run multiple JAR files. See the example below.
@@ -357,4 +272,3 @@ There can be a system that regulates time by days and keeps account of months an
 9. statusCheckConnectionAll() - This will forward all messages to and from each Rover and return the time it takes to communicate.
 
 10. statusCheckDiagnosisAll() - This will check all Rovers and do a diagnosis.
->>>>>>> master
