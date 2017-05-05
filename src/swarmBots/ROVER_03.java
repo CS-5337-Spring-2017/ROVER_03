@@ -33,6 +33,9 @@ import rover_logic.Astar;
 public class ROVER_03 extends Rover {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/master
 	public ROVER_03() {
 		// constructor
 		System.out.println("ROVER_03 rover object constructed");
@@ -48,18 +51,52 @@ public class ROVER_03 extends Rover {
 
 	static enum Direction {
 		NORTH, SOUTH, EAST, WEST;
+<<<<<<< HEAD
 	}
 
 	static class MoveTargetLocation {
 		Coord targetCoord;
+=======
+
+		static Map<Character, Direction> map = new HashMap<Character, Direction>() {
+
+			private static final long serialVersionUID = 1L;
+
+			{
+				put('N', NORTH);
+				put('S', SOUTH);
+				put('E', EAST);
+				put('W', WEST);
+			}
+		};
+
+		static Direction get(char c) {
+
+			return map.get(c);
+		}
+	}
+
+	static class MoveTargetLocation {
+
+		Coord targetCoord;
+
+>>>>>>> origin/master
 		Direction d;
 	}
 
 	static Map<Coord, Integer> coordVisitCountMap = new HashMap<Coord, Integer>() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 		private static final long serialVersionUID = 1L;
 
 		@Override
 		public Integer get(Object key) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 			if (!containsKey(key)) {
 				super.put((Coord) key, new Integer(0));
 			}
@@ -84,15 +121,22 @@ public class ROVER_03 extends Rover {
 
 			// Need to allow time for the connection to the server to be
 			// established
+<<<<<<< HEAD
 			sleepTime = 700;
+=======
+			sleepTime = 300;
+>>>>>>> origin/master
 
 			// Process all messages from server, wait until server requests
 			// Rover ID
 			// name - Return Rover Name to complete connection
 
+<<<<<<< HEAD
 			// Initialize communication server connection to send map updates
 			Communication communication = new Communication("http://localhost:3000/api", rovername, "open_secret");
 
+=======
+>>>>>>> origin/master
 			while (true) {
 				String line = receiveFrom_RCP.readLine();
 				if (line.startsWith("SUBMITNAME")) {
@@ -119,6 +163,11 @@ public class ROVER_03 extends Rover {
 			targetLocation = getTargetLocation();
 			System.out.println(rovername + " TARGET_LOC " + targetLocation);
 
+<<<<<<< HEAD
+=======
+			Astar aStar = new Astar();
+
+>>>>>>> origin/master
 			/**
 			 * #### Rover controller process loop ####
 			 */
@@ -148,6 +197,7 @@ public class ROVER_03 extends Rover {
 				int maxY = currentLoc.ypos + mapTileCenter;
 				if (maxCoord.xpos < maxX && maxCoord.ypos < maxY) {
 					maxCoord = new Coord(maxX, maxY);
+<<<<<<< HEAD
 				}else if (maxCoord.ypos < maxY) {
 					maxCoord = new Coord(maxCoord.xpos, maxY);
 				} else if (maxCoord.xpos < maxX) {
@@ -180,6 +230,82 @@ public class ROVER_03 extends Rover {
 
 				try {
 					communication.postScanMapTiles(currentLoc, scanMapTiles);
+=======
+				} else if (maxCoord.xpos < maxX) {
+					maxCoord = new Coord(maxX, maxCoord.ypos);
+				} else if (maxCoord.ypos < maxY) {
+					maxCoord = new Coord(maxCoord.xpos, maxY);
+				}
+
+				// ***** MOVING *****
+				MoveTargetLocation moveTargetLocation = null;
+				RoverDetail roverDetail = new RoverDetail();
+				ScienceDetail scienceDetail = analyzeAndGetSuitableScience();
+				if (scienceDetail != null) {
+
+					System.out.println("FOUND SCIENCE TO GATHER: " + scienceDetail);
+
+					// The rover is at the location of science, so gather
+					if (scienceDetail.getX() == getCurrentLocation().xpos
+							&& scienceDetail.getY() == getCurrentLocation().ypos) {
+						gatherScience(getCurrentLocation());
+						System.out.println("$$$$$> Gathered science " + scienceDetail.getScience() + " at location "
+								+ getCurrentLocation());
+					} else {
+
+						RoverConfiguration roverConfiguration = RoverConfiguration.valueOf(rovername);
+						RoverDriveType driveType = RoverDriveType.valueOf(roverConfiguration.getMembers().get(0));
+						RoverToolType tool1 = RoverToolType.getEnum(roverConfiguration.getMembers().get(1));
+						RoverToolType tool2 = RoverToolType.getEnum(roverConfiguration.getMembers().get(2));
+
+						aStar.addScanMap(doScan(), getCurrentLocation(), tool1, tool2);
+
+						char dirChar = aStar.findPath(getCurrentLocation(),
+								new Coord(scienceDetail.getX(), scienceDetail.getY()), driveType);
+
+						moveTargetLocation = new MoveTargetLocation();
+						moveTargetLocation.d = Direction.get(dirChar);
+
+						roverDetail.setRoverMode(RoverMode.GATHER);
+
+						System.out.println("=====> In gather mode using Astar in the direction " + dirChar);
+					}
+
+				} else {
+					moveTargetLocation = chooseMoveTargetLocation(scanMapTiles, currentLocInMapTile, currentLoc,
+							mapTileCenter);
+
+					System.out.println("*****> In explore mode in the direction " + moveTargetLocation.d);
+
+					roverDetail.setRoverMode(RoverMode.EXPLORE);
+				}
+
+				if (moveTargetLocation != null && moveTargetLocation.d != null) {
+					switch (moveTargetLocation.d) {
+					case NORTH:
+						moveNorth();
+						break;
+					case EAST:
+						moveEast();
+						break;
+					case SOUTH:
+						moveSouth();
+						break;
+					case WEST:
+						moveWest();
+						break;
+					}
+
+					if (!previousLoc.equals(getCurrentLocation())) {
+						coordVisitCountMap.put(moveTargetLocation.targetCoord,
+								coordVisitCountMap.get(moveTargetLocation.targetCoord) + 1);
+					}
+				}
+
+				try {
+					sendRoverDetail();
+					postScanMapTiles();
+>>>>>>> origin/master
 				} catch (Exception e) {
 					System.err.println("Post current map to communication server failed. Cause: "
 							+ e.getClass().getName() + ": " + e.getMessage());
@@ -209,28 +335,52 @@ public class ROVER_03 extends Rover {
 	} // END of Rover run thread
 
 	private Coord getCoordNorthOf(Coord c) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 		return new Coord(c.xpos, c.ypos - 1);
 	}
 
 	private Coord getCoordEastOf(Coord c) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 		return new Coord(c.xpos + 1, c.ypos);
 	}
 
 	private Coord getCoordSouthOf(Coord c) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 		return new Coord(c.xpos, c.ypos + 1);
 	}
 
 	private Coord getCoordWestOf(Coord c) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 		return new Coord(c.xpos - 1, c.ypos);
 	}
 
 	private boolean isBlocked(MapTile[][] mapTiles, Coord c) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 		return mapTiles[c.xpos][c.ypos].getHasRover() || mapTiles[c.xpos][c.ypos].getTerrain() == Terrain.ROCK
 				|| mapTiles[c.xpos][c.ypos].getTerrain() == Terrain.NONE;
 	}
 
 	private MoveTargetLocation chooseMoveTargetLocation(MapTile[][] scanMapTiles, Coord currentLocInMapTile,
 			Coord currentLoc, int mapTileCenter) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 		Coord northCoordInMapTile = getCoordNorthOf(currentLocInMapTile);
 		Coord eastCoordInMapTile = getCoordEastOf(currentLocInMapTile);
 		Coord southCoordInMapTile = getCoordSouthOf(currentLocInMapTile);
@@ -284,6 +434,10 @@ public class ROVER_03 extends Rover {
 	}
 
 	private Stack<Direction> getFavoredDirStack(Coord currentLoc, int mapTileCenter) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 		int northUnvisitedCount = 0, eastUnvisitedCount = 0, southUnvisitedCount = 0, westUnvisitedCount = 0;
 		for (int x = 0; x < currentLoc.xpos; x++) {
 			if (coordVisitCountMap.get(new Coord(x, currentLoc.ypos)) == 0) {
@@ -335,6 +489,10 @@ public class ROVER_03 extends Rover {
 	}
 
 	private void printMoveTargetLocation(MoveTargetLocation moveTargetLocation) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 		System.out.println("MoveTargetLocation.x = " + moveTargetLocation.targetCoord.xpos);
 		System.out.println("MoveTargetLocation.y = " + moveTargetLocation.targetCoord.ypos);
 		System.out.println("MoveTargetLocation.d = " + moveTargetLocation.d);
@@ -346,6 +504,10 @@ public class ROVER_03 extends Rover {
 	 * Runs the client
 	 */
 	public static void main(String[] args) throws Exception {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 		ROVER_03 client;
 		// if a command line argument is present it is used
 		// as the IP address for connection to SwarmServer instead of localhost
@@ -358,6 +520,7 @@ public class ROVER_03 extends Rover {
 
 		client.run();
 	}
+<<<<<<< HEAD
 =======
     public ROVER_03() {
         // constructor
@@ -811,4 +974,6 @@ public class ROVER_03 extends Rover {
         client.run();
     }
 >>>>>>> f455d3480785888cfe7d61b99510d26374544843
+=======
+>>>>>>> origin/master
 }
