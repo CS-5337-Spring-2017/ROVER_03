@@ -244,6 +244,7 @@ start java -jar ROVER_XX2.jar
 #### Running on a Custom Server:
 
 The Rover constructor default SERVER_ADDRESS is as 'localhost'
+
 ![image 8](./docs/images/8.png)
 
 Go into the swarmBots/ROVER_03.java 
@@ -277,22 +278,21 @@ There can be a system that regulates time by days and keeps account of months an
 
 ##### Possible Implementations on Rover Capabilities
 
-1. checkRange() - This will check the range between two Rovers and its ETA of both Rovers.
+1. checkRange() - This will check the range between two Rovers and its ETA of both Rovers.  This is helpful for resource gathering or swarm troubleshooting by using the A-star Algorithm
 
-2. foundResources() - This will give the location of found resources from all Rovers and display which Rover has discovered what resources.
+2. foundResources() - This will give the location of found resources from all Rovers and display which Rover has discovered what resources. This can be useful so swarms don't have to go to the same resource accidently.  
 
-3. setQueue() - This will set the queue for the Rover to retrieve its next resource.
+3. setQueue() - This will set the queue for the Rover to retrieve its next resource. This is useful for creating a line of resource gathering for the swarm.  
 
 4. getQueue() - This will show the next resource to which the Rover will be attending.
 
-5. GetCurrentQueue() - This will show the current resource to which the Rover is attending.   
+5. GetCurrentQueue() - This will show the current resource to which the Rover is attending.  This is useful for checks and optimization.  
 
 6. getQueueOptions() - This will give options regarding the Rover's next available resource.
 
-7. getRoversQueue() - This will display every Rover’s current resource and its next resource.   
+7. getRoversQueue() - This will display every Rover’s current resource and its next resource.  This is useful for checks and optimization.  
+ 
+8. statusCheckConnectionAll() - This will forward all messages to and from each Rover and return the time it takes to communicate.  This is useful for diagnosis and tests for just communication of the swarm.  It also points to its longitude and latitude
 
-8. switchToLongMessages() - If need be, this will project more messages for the Rover.
+9. statusCheckDiagnosisAll() - This will check all Rovers and do a diagnosis including the statusCheckConnectionAll() function.  This is a slower full diagnosis of the Rover's capabilities.  
 
-9. statusCheckConnectionAll() - This will forward all messages to and from each Rover and return the time it takes to communicate.
-
-10. statusCheckDiagnosisAll() - This will check all Rovers and do a diagnosis.
