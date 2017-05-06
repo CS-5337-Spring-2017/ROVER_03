@@ -243,7 +243,31 @@ start java -jar ROVER_XX2.jar
 
 #### Running on a Custom Server:
 
-First, we need to install Node and Java on the server. Then, to run the Swarm Communication Server, install the dependencies in `package.json` and run the server file `app.js` with node. Finally, run the Java Swarm project by first running the Rover Command Processor and then running any Rover Swarm Bots.
+The Rover constructor default SERVER_ADDRESS is as 'localhost'
+![image 8](./docs/images/8.png)
+
+Go into the swarmBots/ROVER_03.java 
+
+![image 9](./docs/images/9.png)
+
+Its here you will see That ROVER_03 is passing in 'localhost'
+
+![image 10](./docs/images/10.png)
+
+If we want to pass in a custom URL, you will find that 'localhost' can be canceled by expresssing an additional argument
+
+![image 11](./docs/images/11.png)
+
+The extra argument is your ipaddress
+```
+java -jar <myjarfile.jar> your_ip_address
+```
+
+If you type ipconfig for windows or for linux ifconfig, you will see your ipaddress.  
+
+![image 12](./docs/images/12.png)
+
+That's it!
 
 ### Make some recommendations on how to improve the implementation of the project.
 
