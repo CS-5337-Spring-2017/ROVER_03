@@ -15,7 +15,6 @@ import java.util.Stack;
 import common.Coord;
 import common.MapTile;
 import common.Rover;
-import common.RoverDetail;
 import common.ScienceDetail;
 import enums.RoverConfiguration;
 import enums.RoverDriveType;
@@ -138,6 +137,9 @@ public class ROVER_03 extends Rover {
 
 			Astar aStar = new Astar();
 
+			RoverMode roverMode = RoverMode.EXPLORE;
+			ScienceDetail scienceDetail = null;
+
 			/**
 			 * #### Rover controller process loop ####
 			 */
@@ -175,9 +177,16 @@ public class ROVER_03 extends Rover {
 
 				// ***** MOVING *****
 				MoveTargetLocation moveTargetLocation = null;
-				RoverDetail roverDetail = new RoverDetail();
-				ScienceDetail scienceDetail = analyzeAndGetSuitableScience();
-				if (scienceDetail != null) {
+
+				if (roverMode == RoverMode.EXPLORE) {
+					scienceDetail = analyzeAndGetSuitableScience();
+					if (scienceDetail != null) {
+						roverMode = RoverMode.GATHER;
+					} else {
+						roverMode = RoverMode.EXPLORE;
+					}
+				}
+				if (roverMode == RoverMode.GATHER) {
 
 					System.out.println("FOUND SCIENCE TO GATHER: " + scienceDetail);
 
@@ -187,6 +196,8 @@ public class ROVER_03 extends Rover {
 						gatherScience(getCurrentLocation());
 						System.out.println("$$$$$> Gathered science " + scienceDetail.getScience() + " at location "
 								+ getCurrentLocation());
+						scienceDetail = null;
+						roverMode = RoverMode.EXPLORE;
 					} else {
 
 						RoverConfiguration roverConfiguration = RoverConfiguration.valueOf(rovername);
@@ -202,8 +213,6 @@ public class ROVER_03 extends Rover {
 						moveTargetLocation = new MoveTargetLocation();
 						moveTargetLocation.d = Direction.get(dirChar);
 
-						roverDetail.setRoverMode(RoverMode.GATHER);
-
 						System.out.println("=====> In gather mode using Astar in the direction " + dirChar);
 					}
 
@@ -212,8 +221,6 @@ public class ROVER_03 extends Rover {
 							mapTileCenter);
 
 					System.out.println("*****> In explore mode in the direction " + moveTargetLocation.d);
-
-					roverDetail.setRoverMode(RoverMode.EXPLORE);
 				}
 
 				if (moveTargetLocation != null && moveTargetLocation.d != null) {
@@ -230,6 +237,8 @@ public class ROVER_03 extends Rover {
 					case WEST:
 						moveWest();
 						break;
+					default:
+						roverMode = RoverMode.EXPLORE;
 					}
 
 					if (!previousLoc.equals(getCurrentLocation())) {
@@ -239,7 +248,7 @@ public class ROVER_03 extends Rover {
 				}
 
 				try {
-					sendRoverDetail();
+					sendRoverDetail(roverMode);
 					postScanMapTiles();
 				} catch (Exception e) {
 					System.err.println("Post current map to communication server failed. Cause: "

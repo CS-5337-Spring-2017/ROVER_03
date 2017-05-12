@@ -15,8 +15,8 @@ public enum RoverConfiguration {
 	// (Drive type, accessory slot 1, accessory slot 2)
 	NONE,
 	
-	ROVER_01 ("TREADS", "EXCAVATOR", "SPECTRAL_SENSOR"),
-	ROVER_02 ("WALKER", "EXCAVATOR", "DRILL"),
+	ROVER_01 ("WHEELS", "EXCAVATOR", "CHEMICAL_SENSOR"),
+	ROVER_02 ("WALKER", "SPECTRAL_SENSOR", "DRILL"),
 	//Modified by Mani: 03/07/17
 	//ROVER_03 ("WHEELS", "EXCAVATOR", "CHEMICAL_SENSOR"),
 	ROVER_03 ("TREADS", "EXCAVATOR", "RADAR_SENSOR"),
